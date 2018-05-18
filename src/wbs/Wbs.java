@@ -6,8 +6,11 @@
 package wbs;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import prin.pg_login;
 
 /**
@@ -49,5 +52,13 @@ public class Wbs {
             
         return false;
     }
+    
+    public void addToFile(String line,String fileName) 
+            throws IOException
+    {
+        PrintWriter e = new PrintWriter(new BufferedWriter(new FileWriter(fileName,true)));
+        e.print(line);
+    }
+    
     
 }
