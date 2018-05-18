@@ -5,6 +5,9 @@
  */
 package wbs;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import prin.pg_login;
 
 /**
@@ -26,5 +29,25 @@ public class Wbs {
     public static boolean open_vtn=false;
     public static pg_login pgl;
     
+//USABLE METHODS________________________________________________________________    
+    
+    public static boolean isInFile(String compare, String fileName)
+            throws IOException
+    {
+        int sepPos;
+        String line;
+        BufferedReader read = new BufferedReader(new FileReader(fileName));
+        
+        while((line=read.readLine())!=null)
+        {
+            sepPos=line.indexOf(",");
+            if (line.substring(0, sepPos).equals(compare)) 
+            {
+                return true;
+            }
+        }
+            
+        return false;
+    }
     
 }
