@@ -21,12 +21,17 @@ import wbs.Wbs;
  * @author Leonidas
  */
 public class pg_login extends javax.swing.JFrame {
-
+    String name;
+    
+    
+    
     /**
      * Creates new form pg_login
      */
     public pg_login() {
         initComponents();
+        pg_adminprin p = new pg_adminprin();
+        
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -294,7 +299,7 @@ public class pg_login extends javax.swing.JFrame {
             lbl_mensajeerror.setText("Debe llenar los dos campos");
         } else {
             String words = txt_user.getText() + "," + txt_pass.getText();
-             System.out.println("Words: "+words);
+            System.out.println("Words: "+words);
             String line = "";
             boolean mensajeerror = false;
             BufferedReader reader = null;
@@ -313,9 +318,11 @@ public class pg_login extends javax.swing.JFrame {
                             this.dispose();
                         }else if(dig == '1'){
                             mensajeerror = true;
+                            
                             new pg_adminprin().setVisible(true);
                             this.dispose();
                         }
+                        name = txt_user.getText();
                     }
                   }
              if (mensajeerror == false) {
