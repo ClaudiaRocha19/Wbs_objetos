@@ -262,7 +262,7 @@ public class pg_login extends javax.swing.JFrame {
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(this, "Por favor ingrese un correo real válido", "Correo inválido", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Por favor ingrese un correo válido", "Correo inválido", JOptionPane.ERROR_MESSAGE);
                     }
                 }    
             }
