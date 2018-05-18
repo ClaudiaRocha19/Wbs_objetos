@@ -34,7 +34,7 @@ public class Wbs {
     
 //USABLE METHODS________________________________________________________________    
     
-    public static boolean isInFile(String compare, String fileName)
+    public boolean isInFile(String compare, String fileName)
             throws IOException
     {
         int sepPos;
@@ -58,6 +58,7 @@ public class Wbs {
     {
         PrintWriter e = new PrintWriter(new BufferedWriter(new FileWriter(fileName,true)));
         e.print(line);
+        e.close();
     }
     
     
