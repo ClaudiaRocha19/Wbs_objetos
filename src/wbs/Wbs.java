@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import mail.*;
 import prin.pg_login;
+import tree.Nodo;
 
 /**
  *
@@ -33,7 +34,11 @@ public class Wbs {
     public static boolean open_vtn=false;
     public static pg_login pgl;
     
+    public static  Nodo tree = new Nodo();
+    
+    
     private MailService ms= new MailService();
+    
     
 //USABLE METHODS________________________________________________________________    
     

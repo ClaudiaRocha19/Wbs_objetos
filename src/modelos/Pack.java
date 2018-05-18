@@ -6,6 +6,7 @@
 package modelos;
 
 import java.util.ArrayList;
+import tree.SubNodo;
 
 /**
  *
@@ -15,12 +16,30 @@ public class Pack {
     
     ArrayList<Task> tasks = new ArrayList<>();
     Project project;
+    String name;
+    SubNodo subnativo;
+
+    public Pack(Project project, String name) {
+        this.project = project;
+        this.name = name;
+    }
+
+    public Pack(Project project, String name, SubNodo subnativo) {
+        this.project = project;
+        this.name = name;
+        this.subnativo = subnativo;
+    }
+    
+    
     
 //______________________________________________________________________________    
     
     public void addTask(Task task)
     {
+        SubNodo nuevo = new SubNodo(task);
+        subnativo.add(nuevo);
         tasks.add(task);
+        task.nativo = nuevo;
     }
     
     

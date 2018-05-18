@@ -6,6 +6,7 @@
 package modelos;
 
 import java.util.Date;
+import tree.SubNodo;
 
 /**
  *
@@ -22,6 +23,8 @@ public class Task {
     
     private Pack    pack;
 
+    SubNodo nativo;
+    
     public Task(User attendant, Date startDate, Date endDate, String taskName, Pack pack) 
     {
         this.attendant = attendant;
@@ -29,7 +32,20 @@ public class Task {
         this.endDate = endDate;
         this.taskName = taskName;
         this.pack = pack;
+        pack.addTask(this);
     }
+
+    public Task(User attendant, Date startDate, Date endDate, String taskName, Pack pack, SubNodo nativo) {
+        this.attendant = attendant;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.taskName = taskName;
+        this.pack = pack;
+        this.nativo = nativo;
+        pack.addTask(this);
+    }
+    
+    
     
 //______________________________________________________________________________    
 

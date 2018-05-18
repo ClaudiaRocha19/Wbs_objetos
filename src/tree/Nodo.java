@@ -22,6 +22,9 @@ public class Nodo{
         this.info = info;
         level = new Integer(1);
     }
+
+    public Nodo() {
+    }
     
     
     
