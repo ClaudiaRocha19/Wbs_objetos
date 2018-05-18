@@ -253,10 +253,17 @@ public class pg_login extends javax.swing.JFrame {
                 }
                 else
                 {
-                    wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText(), "usuarios.txt");
-                    JOptionPane.showMessageDialog(null,"Registro exitoso");
-                    pnl_registrate.setVisible(false);
-                    pnl_login.setVisible(true);
+                    if (wbs.welcomeMail(txt_regemail.getText(),txt_reguser.getText())) 
+                    {
+                        wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText(), "usuarios.txt");
+                        JOptionPane.showMessageDialog(null,"Registro exitoso");
+                        pnl_registrate.setVisible(false);
+                        pnl_login.setVisible(true);
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(this, "Por favor ingrese un correo real válido", "Correo inválido", JOptionPane.ERROR_MESSAGE);
+                    }
                 }    
             }
             catch(IOException ioe)
