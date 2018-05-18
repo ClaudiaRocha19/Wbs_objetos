@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import paneles.CambiaPanel;
+import wbs.Wbs;
 /**
  *
  * @author Leonidas
@@ -238,7 +239,39 @@ public class pg_login extends javax.swing.JFrame {
 
     private void btn_ingresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar1ActionPerformed
         
-        System.out.println("registro");
+        if (txt_reguser.getText().isEmpty() || txt_regpass.getText().isEmpty() || txt_regemail.getText().isEmpty()) 
+        {
+             JOptionPane.showMessageDialog(this, "Por favor llene todos los campos de registro", "Parametros vacios", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            try
+            {
+                if (wbs.isInFile(txt_reguser.getText(),"usuarios.txt")) 
+                {
+                    JOptionPane.showMessageDialog(null,"Este usuario ya se encuentra registrado");
+                }
+                else
+                {
+                    wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText(), "usuarios.txt");
+                    JOptionPane.showMessageDialog(null,"Registro exitoso");
+                    pnl_registrate.setVisible(false);
+                    pnl_login.setVisible(true);
+                }    
+            }
+            catch(IOException ioe)
+            {
+                System.out.println("error de archivo");
+                JOptionPane.showMessageDialog(null,"no fue posible realizar el registro");
+                ioe.printStackTrace();
+            }
+            catch(NullPointerException npe)
+            {
+                System.out.println("parametros faltantes");
+                npe.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Por favor llene todos los campos de registro", "Parametros vacios", JOptionPane.ERROR_MESSAGE);
+            }
+        }
         
     }//GEN-LAST:event_btn_ingresar1ActionPerformed
 
@@ -331,6 +364,10 @@ public class pg_login extends javax.swing.JFrame {
         });
     }
 
+    
+    private Wbs wbs = new Wbs();
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_back;
     private javax.swing.JLabel btn_cerrar;
