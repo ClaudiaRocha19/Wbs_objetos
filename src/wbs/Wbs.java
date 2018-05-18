@@ -5,6 +5,8 @@
  */
 package wbs;
 
+import prin.pg_login;
+
 /**
  *
  * @author RICARDO
@@ -16,9 +18,13 @@ public class Wbs {
      */
     public static void main(String[] args) {
         
+        pgl = new pg_login();
+        pgl.setVisible(true);
+        
     }
     
-    
+    public static boolean open_vtn=false;
+    public static pg_login pgl;
     
     
 }
