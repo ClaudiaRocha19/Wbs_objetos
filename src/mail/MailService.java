@@ -96,12 +96,19 @@ public class MailService implements Runnable{
         message.setSubject(actualMail.getSubject());
         message.setText(actualMail.getMsj());
 
-        for (String mas : this.mass) 
+        try
         {
-            Transport.send(message,InternetAddress.parse(mas));
-            //JOptionPane.showMessageDialog(null, "Su mensaje ha sido enviado");
+        message.setFileName(actualMail.getFileUrl());
         }
-        
+        catch(Exception e){System.out.println("sin archivo adjunto");}
+        finally
+        {    
+            for (String mas : this.mass) 
+            {
+                Transport.send(message,InternetAddress.parse(mas));
+                //JOptionPane.showMessageDialog(null, "Su mensaje ha sido enviado");
+            }
+        }
 
     }
     
@@ -132,11 +139,17 @@ public class MailService implements Runnable{
                                 InternetAddress.parse(actualMail.getDestiny()));
         message.setSubject(actualMail.getSubject());
         message.setText(actualMail.getMsj());
+        
+        try
+        {
         message.setFileName(actualMail.getFileUrl());
-
-        Transport.send(message,InternetAddress.parse(actualMail.getDestiny()));
-        JOptionPane.showMessageDialog(null, "Su mensaje ha sido enviado");
-
+        }
+        catch(Exception e){System.out.println("sin archivo adjunto");}
+        finally
+        {
+            Transport.send(message,InternetAddress.parse(actualMail.getDestiny()));
+            //JOptionPane.showMessageDialog(null, "Su mensaje ha sido enviado");
+        }
     }
     
     @Override

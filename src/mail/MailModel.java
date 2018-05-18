@@ -36,6 +36,15 @@ public class MailModel {
         this.destiny = destiny;
     }
 
+    public MailModel(String subject, String msj, String destiny) {
+        this.userName= "WBSprojectman";
+        this.password= "IKARUS FALLING";
+        this.subject = subject;
+        this.fileUrl = "";
+        this.msj = msj;
+        this.destiny = destiny;
+    }
+    
     public MailModel(String destiny) 
     {
         this.userName= "WBSprojectman";

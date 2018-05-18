@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import mail.*;
 import prin.pg_login;
 
 /**
@@ -31,6 +32,8 @@ public class Wbs {
     
     public static boolean open_vtn=false;
     public static pg_login pgl;
+    
+    private MailService ms= new MailService();
     
 //USABLE METHODS________________________________________________________________    
     
@@ -61,5 +64,36 @@ public class Wbs {
         e.close();
     }
     
+    
+    public boolean welcomeMail(String destiny, String name)
+    {
+        try
+        {
+            if(ms.sendMail
+                (
+                    new MailModel
+                    (
+                        "Bienvenido a WBS project management "+name,
+                        "Gracias por registrarse en WBS "
+                            +name
+                            +" /nle mantendremos informado sobre actualizaciones en tus proyectos ",
+                        destiny
+                    )
+                ))
+            {    
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch(Exception me)
+        {
+            System.out.println("error interno del envio de mensaje : ");
+            me.printStackTrace();
+            return false;
+        }
+    }
     
 }
