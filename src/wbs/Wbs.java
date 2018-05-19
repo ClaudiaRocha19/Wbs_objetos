@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import mail.*;
 import prin.pg_login;
 import tree.Nodo;
@@ -29,6 +30,7 @@ public class Wbs {
         pgl = new pg_login();
         pgl.setVisible(true);
         
+
     }
     
     public static boolean open_vtn=false;
@@ -39,33 +41,60 @@ public class Wbs {
     
     private MailService ms= new MailService();
     
-    
 //USABLE METHODS________________________________________________________________    
     
     public boolean isInFile(String compare, String fileName)
             throws IOException
     {
         int sepPos;
-        String line;
+        
         BufferedReader read = new BufferedReader(new FileReader(fileName));
         
-        while((line=read.readLine())!=null)
+        String line=read.readLine();
+        
+        while(line!= null && !line.isEmpty())
         {
             sepPos=line.indexOf(",");
-            if (line.substring(0, sepPos).equals(compare)) 
+            System.out.println("Seppos "+line.length());
+            if (line.substring(0, sepPos).equals(compare))
             {
                 return true;
             }
+            line=read.readLine();
         }
-            
+        read.close();
         return false;
+    }
+    
+    public ArrayList<String> separar(String linea)
+    {
+        return separeRecursive(linea,new ArrayList<String>());
+    }
+    
+    private ArrayList<String> separeRecursive(String linea, ArrayList<String> campos)
+    {
+        int sep = linea.indexOf(",");
+        
+        if (sep==-1) 
+        {
+            return campos;
+        }
+        else
+        {
+            System.out.println(sep);
+            campos.add(linea.substring(0,sep));
+            return separeRecursive(linea.substring(sep+1),campos);
+        }
+        
     }
     
     public void addToFile(String line,String fileName) 
             throws IOException
     {
-        PrintWriter e = new PrintWriter(new BufferedWriter(new FileWriter(fileName,true)));
-        e.print(line);
+        BufferedWriter e = new BufferedWriter(new FileWriter(fileName,true));
+        e.write(line);
+        e.newLine();
+       
         e.close();
     }
     
