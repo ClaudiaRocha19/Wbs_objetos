@@ -75,7 +75,7 @@ public class pg_login extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_regemail = new javax.swing.JTextField();
         btn_back = new javax.swing.JLabel();
-        btn_ingresar1 = new rojeru_san.RSButton();
+        btn_registrate = new rojeru_san.RSButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(934, 481));
@@ -88,7 +88,7 @@ public class pg_login extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Close_Window_30px.png"))); // NOI18N
-        btn_cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_cerrarMouseClicked(evt);
@@ -157,7 +157,7 @@ public class pg_login extends javax.swing.JFrame {
         lbl_registrate.setForeground(new java.awt.Color(172, 95, 47));
         lbl_registrate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_registrate.setText("Regístrate");
-        lbl_registrate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_registrate.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         lbl_registrate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_registrateMouseClicked(evt);
@@ -200,7 +200,7 @@ public class pg_login extends javax.swing.JFrame {
         pnl_registrate.add(txt_regemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 240, 30));
 
         btn_back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Go_Back_24px.png"))); // NOI18N
-        btn_back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_back.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_back.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_backMouseClicked(evt);
@@ -208,16 +208,16 @@ public class pg_login extends javax.swing.JFrame {
         });
         pnl_registrate.add(btn_back, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, 30));
 
-        btn_ingresar1.setBackground(new java.awt.Color(172, 95, 47));
-        btn_ingresar1.setText("Registrar");
-        btn_ingresar1.setColorHover(new java.awt.Color(208, 124, 66));
-        btn_ingresar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btn_ingresar1.addActionListener(new java.awt.event.ActionListener() {
+        btn_registrate.setBackground(new java.awt.Color(172, 95, 47));
+        btn_registrate.setText("Registrar");
+        btn_registrate.setColorHover(new java.awt.Color(208, 124, 66));
+        btn_registrate.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_registrate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ingresar1ActionPerformed(evt);
+                btn_registrateActionPerformed(evt);
             }
         });
-        pnl_registrate.add(btn_ingresar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 240, -1));
+        pnl_registrate.add(btn_registrate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 240, -1));
 
         pnl_contenedor.add(pnl_registrate);
 
@@ -242,7 +242,7 @@ public class pg_login extends javax.swing.JFrame {
         pnl_login.setVisible(false);
     }//GEN-LAST:event_lbl_registrateMouseClicked
 
-    private void btn_ingresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresar1ActionPerformed
+    private void btn_registrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrateActionPerformed
         
         if (txt_reguser.getText().isEmpty() || txt_regpass.getText().isEmpty() || txt_regemail.getText().isEmpty()) 
         {
@@ -260,7 +260,7 @@ public class pg_login extends javax.swing.JFrame {
                 {
                     if (wbs.welcomeMail(txt_regemail.getText(),txt_reguser.getText())) 
                     {
-                        wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText(), "usuarios.txt");
+                        wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText()+",2,", "usuarios.txt");
                         JOptionPane.showMessageDialog(null,"Registro exitoso");
                         pnl_registrate.setVisible(false);
                         pnl_login.setVisible(true);
@@ -285,7 +285,7 @@ public class pg_login extends javax.swing.JFrame {
             }
         }
         
-    }//GEN-LAST:event_btn_ingresar1ActionPerformed
+    }//GEN-LAST:event_btn_registrateActionPerformed
 
     private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
         pnl_registrate.setVisible(false);
@@ -310,19 +310,23 @@ public class pg_login extends javax.swing.JFrame {
                     if (line.indexOf(words) > -1) {  
                         size = line.length();
                           System.out.println("Line: "+line);
-                        char dig = line.charAt(size - 1);
+                        char dig = line.charAt(size - 2);
                           System.out.println("Dig: "+dig);
+                          name = txt_user.getText();
                         if (dig == '2') {
                             mensajeerror = true;
                             new pg_userprin().setVisible(true);
+                            
                             this.dispose();
                         }else if(dig == '1'){
                             mensajeerror = true;
                             
-                            new pg_adminprin().setVisible(true);
+                            pg_adminprin admp = new pg_adminprin();
+                            admp.setVisible(true);
+                            admp.setNombre(name);
                             this.dispose();
                         }
-                        name = txt_user.getText();
+                        
                     }
                   }
              if (mensajeerror == false) {
@@ -386,8 +390,8 @@ public class pg_login extends javax.swing.JFrame {
     private javax.swing.JLabel btn_back;
     private javax.swing.JLabel btn_cerrar;
     private rojeru_san.RSButton btn_ingresar;
-    private rojeru_san.RSButton btn_ingresar1;
     private rojeru_san.RSButton btn_manuales;
+    private rojeru_san.RSButton btn_registrate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
