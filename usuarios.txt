@@ -1,6 +1,6 @@
 rick,rick,rpayan@uninorte.edu.co,1,
 hurtado,hurtado,mjhurtado@uninorte.edu.co,2,
-Angela,1234567,gangelam@uninorte.edu.co,2,
+Angela,1234567,gangelam@uninorte.edu.co,1,
 claudia,claudia,cmrocha@uninorte.edu.co,1,
 wbs,wbs,wbsprojectman@gmail.com,2,
 abc,abc,wbsprojectman@gmail.com,2,

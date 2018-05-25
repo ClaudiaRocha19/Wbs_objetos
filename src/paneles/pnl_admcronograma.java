@@ -27,35 +27,32 @@ public class pnl_admcronograma extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
+        rSCalendar1 = new rojeru_san.componentes.RSCalendar();
 
         setBackground(new java.awt.Color(218, 175, 118));
         setMinimumSize(new java.awt.Dimension(689, 521));
 
-        jLabel8.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(47, 19, 6));
-        jLabel8.setText("Cronograma");
+        rSCalendar1.setBackground(new java.awt.Color(245, 246, 212));
+        rSCalendar1.setAltoFilas(50);
+        rSCalendar1.setAutoscrolls(true);
+        rSCalendar1.setColorBackground(new java.awt.Color(133, 219, 24));
+        rSCalendar1.setColorButtonHover(new java.awt.Color(167, 197, 32));
+        rSCalendar1.setColorDiaActual(new java.awt.Color(205, 232, 85));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(292, 292, 292)
-                .addComponent(jLabel8)
-                .addContainerGap(299, Short.MAX_VALUE))
+            .addComponent(rSCalendar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(241, Short.MAX_VALUE)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(240, 240, 240))
+            .addComponent(rSCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel8;
+    private rojeru_san.componentes.RSCalendar rSCalendar1;
     // End of variables declaration//GEN-END:variables
 }

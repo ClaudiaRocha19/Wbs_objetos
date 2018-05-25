@@ -5,6 +5,8 @@
  */
 package paneles;
 
+import java.awt.Color;
+
 /**
  *
  * @author Leonidas
@@ -16,6 +18,9 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
      */
     public pnl_admaddtarea() {
         initComponents();
+        combo_prioridad.addItem("Alta");
+        combo_prioridad.addItem("Media");
+        combo_prioridad.addItem("Baja");
     }
 
     /**
@@ -27,36 +32,141 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
+        combo_paquete = new rojerusan.RSComboMetro();
+        jLabel1 = new javax.swing.JLabel();
+        txt_nomtarea = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        combo_prioridad = new rojerusan.RSComboMetro();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        date_fechalimite = new rojeru_san.componentes.RSDateChooser();
+        date_fechainicio = new rojeru_san.componentes.RSDateChooser();
+        btn_addtarea = new rojeru_san.RSButton();
+        pnl_prioricolor = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(218, 175, 118));
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(689, 521));
         setPreferredSize(new java.awt.Dimension(689, 521));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(47, 19, 6));
-        jLabel8.setText("Tarea");
+        combo_paquete.setColorArrow(new java.awt.Color(90, 31, 0));
+        combo_paquete.setColorBorde(new java.awt.Color(209, 87, 13));
+        combo_paquete.setColorFondo(new java.awt.Color(209, 87, 13));
+        combo_paquete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_paqueteActionPerformed(evt);
+            }
+        });
+        add(combo_paquete, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 68, 246, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(303, 303, 303)
-                .addComponent(jLabel8)
-                .addContainerGap(341, Short.MAX_VALUE))
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setText("Seleccione un paquete: ");
+        jLabel1.setToolTipText("");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 85, 147, -1));
+
+        txt_nomtarea.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        add(txt_nomtarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 196, 246, 33));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setText("Nombre de tarea:");
+        jLabel2.setToolTipText("");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 204, 146, -1));
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setText("Prioridad");
+        jLabel3.setToolTipText("");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 132, 146, -1));
+
+        combo_prioridad.setColorArrow(new java.awt.Color(90, 31, 0));
+        combo_prioridad.setColorBorde(new java.awt.Color(209, 87, 13));
+        combo_prioridad.setColorFondo(new java.awt.Color(209, 87, 13));
+        combo_prioridad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                combo_prioridadMouseClicked(evt);
+            }
+        });
+        combo_prioridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_prioridadActionPerformed(evt);
+            }
+        });
+        add(combo_prioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 124, 125, -1));
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setText("Fecha límite:");
+        jLabel4.setToolTipText("");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 146, -1));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setText("Fecha inicio:");
+        jLabel5.setToolTipText("");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 277, 146, -1));
+
+        date_fechalimite.setColorBackground(new java.awt.Color(209, 87, 13));
+        date_fechalimite.setColorForeground(new java.awt.Color(102, 51, 0));
+        add(date_fechalimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
+
+        date_fechainicio.setColorBackground(new java.awt.Color(209, 87, 13));
+        date_fechainicio.setColorForeground(new java.awt.Color(102, 51, 0));
+        add(date_fechainicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
+
+        btn_addtarea.setBackground(new java.awt.Color(204, 51, 0));
+        btn_addtarea.setText("Añadir tarea");
+        btn_addtarea.setColorHover(new java.awt.Color(255, 153, 0));
+        btn_addtarea.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        add(btn_addtarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 250, -1));
+
+        pnl_prioricolor.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnl_prioricolorLayout = new javax.swing.GroupLayout(pnl_prioricolor);
+        pnl_prioricolor.setLayout(pnl_prioricolorLayout);
+        pnl_prioricolorLayout.setHorizontalGroup(
+            pnl_prioricolorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+        pnl_prioricolorLayout.setVerticalGroup(
+            pnl_prioricolorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
+
+        add(pnl_prioricolor, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 60, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void combo_paqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_paqueteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_paqueteActionPerformed
+
+    private void combo_prioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_prioridadActionPerformed
+        if(combo_prioridad.getSelectedItem().equals("Alta")){
+            pnl_prioricolor.setBackground(Color.red);
+        }else {
+            if(combo_prioridad.getSelectedItem().equals("Media")){
+            pnl_prioricolor.setBackground(Color.yellow);
+            }else{
+                pnl_prioricolor.setBackground(Color.green);
+            }
+            
+        }
+    }//GEN-LAST:event_combo_prioridadActionPerformed
+
+    private void combo_prioridadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_prioridadMouseClicked
+
+    }//GEN-LAST:event_combo_prioridadMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel8;
+    private rojeru_san.RSButton btn_addtarea;
+    private rojerusan.RSComboMetro combo_paquete;
+    private rojerusan.RSComboMetro combo_prioridad;
+    private rojeru_san.componentes.RSDateChooser date_fechainicio;
+    private rojeru_san.componentes.RSDateChooser date_fechalimite;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel pnl_prioricolor;
+    private javax.swing.JTextField txt_nomtarea;
     // End of variables declaration//GEN-END:variables
 }
