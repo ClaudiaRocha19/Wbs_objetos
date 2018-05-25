@@ -18,13 +18,13 @@ public final class Admin extends User{
     ArrayList<User> collaborators = new ArrayList<>();
     ArrayList<Project> projects = new ArrayList<>();
     
-    public void createProject(String name)
+    public Admin(String name) {
+        super(name);
+    }
+    
+    public void addProject(Project project)
     {
-        
-        Project principal = new Project(name,Wbs.tree);
-        Wbs.tree = new Nodo(principal);
-        projects.add(principal);
-        System.out.println("proyecto creado con éxito");
+        this.projects.add(project);
     }
     
     

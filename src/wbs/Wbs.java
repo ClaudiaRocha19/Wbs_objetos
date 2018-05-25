@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import mail.*;
+import modelos.*;
 import prin.pg_login;
 import tree.Nodo;
 
@@ -37,7 +38,8 @@ public class Wbs {
     public static pg_login pgl;
     
     public static  Nodo tree = new Nodo();
-    
+    public static User user;
+    public static Admin admin;
     
     private MailService ms= new MailService();
     
@@ -128,6 +130,19 @@ public class Wbs {
             me.printStackTrace();
             return false;
         }
+    }
+    
+    public void createProject(Project project)
+    {
+        this.admin.addProject(project);
+        openProject(project);
+    }
+    
+    public void openProject(Project project)
+    {
+        // pendiente diseño y aplicación de ventana
+        
+        
     }
     
 }
