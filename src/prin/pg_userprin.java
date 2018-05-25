@@ -7,8 +7,11 @@ package prin;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import modelos.Project;
+import wbs.Wbs;
 
 /**
  *
@@ -27,8 +30,15 @@ public class pg_userprin extends javax.swing.JFrame {
             Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setLocationRelativeTo(null);
+        
+        Wbs.savedParameters=this;
+        
     }
 
+    public void setNombre(String nombre) {
+        this.lbl_nombre.setText(nombre);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,6 +59,7 @@ public class pg_userprin extends javax.swing.JFrame {
         btn_editperfil = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lbl_nombre = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnl_mostrarproyectos = new javax.swing.JPanel();
         btn_addproyecto = new javax.swing.JPanel();
@@ -58,7 +69,7 @@ public class pg_userprin extends javax.swing.JFrame {
 
         rSButtonIconD2.setText("rSButtonIconD2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(218, 175, 118));
@@ -118,6 +129,12 @@ public class pg_userprin extends javax.swing.JFrame {
 
         jPanel2.add(btn_editperfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 190, -1));
 
+        lbl_nombre.setBackground(new java.awt.Color(255, 255, 255));
+        lbl_nombre.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        lbl_nombre.setForeground(new java.awt.Color(218, 175, 118));
+        lbl_nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 150, 40));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 545));
 
         javax.swing.GroupLayout pnl_mostrarproyectosLayout = new javax.swing.GroupLayout(pnl_mostrarproyectos);
@@ -136,6 +153,11 @@ public class pg_userprin extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 580, 400));
 
         btn_addproyecto.setBackground(new java.awt.Color(172, 95, 47));
+        btn_addproyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addproyectoMouseClicked(evt);
+            }
+        });
         btn_addproyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -169,6 +191,12 @@ public class pg_userprin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_addproyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addproyectoMouseClicked
+        //String name = JOptionPane.showInputDialog(null,"Nombre del projecto");
+        wbs.createProject(new Project(JOptionPane.showInputDialog(null,"Nombre del projecto"),Wbs.tree));
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_addproyectoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -208,6 +236,15 @@ public class pg_userprin extends javax.swing.JFrame {
         });
     }
 
+    @Override
+    public void dispose()
+    {
+        new pg_login().setVisible(true);
+        super.dispose();
+    }
+    
+    Wbs wbs = new Wbs();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_addproyecto;
     private javax.swing.JPanel btn_editperfil;
@@ -224,6 +261,7 @@ public class pg_userprin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_foto;
+    private javax.swing.JLabel lbl_nombre;
     private javax.swing.JPanel pnl_mostrarproyectos;
     private rojerusan.RSButtonIconD rSButtonIconD2;
     // End of variables declaration//GEN-END:variables

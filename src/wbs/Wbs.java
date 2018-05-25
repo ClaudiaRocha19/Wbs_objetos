@@ -12,7 +12,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import mail.*;
+import modelos.*;
+import prin.pg_adminprin;
 import prin.pg_login;
 import tree.Nodo;
 
@@ -35,8 +38,10 @@ public class Wbs {
     
     public static boolean open_vtn=false;
     public static pg_login pgl;
-    
+    public static JFrame savedParameters;
     public static  Nodo tree = new Nodo();
+    public static User user;
+    public static Admin admin;
     
     
     private MailService ms= new MailService();
@@ -128,6 +133,20 @@ public class Wbs {
             me.printStackTrace();
             return false;
         }
+    }
+    
+    public void createProject(Project project)
+    {
+        this.admin.addProject(project);
+        openProject(project);
+    }
+    
+    public void openProject(Project project)
+    {
+        // pendiente diseño y aplicación de ventana
+        pg_adminprin pgp = new pg_adminprin();
+        pgp.setNombre(project.getName());
+        pgp.setVisible(true);
     }
     
 }

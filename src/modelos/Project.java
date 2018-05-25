@@ -36,5 +36,23 @@ public class Project {
         
         packs.add(nuevo);
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ArrayList<Pack> getPacks() {
+        return packs;
+    }
+
+    public void setPacks(ArrayList<Pack> packs) {
+        this.packs = packs;
+    }
+    
+    
     
 }

@@ -36,6 +36,7 @@ public class pg_adminprin extends javax.swing.JFrame {
             Logger.getLogger(pg_adminprin.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -57,7 +58,6 @@ public class pg_adminprin extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         lbl_nombre = new javax.swing.JLabel();
         lbl_nombreproyecto = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         btn_cronograma = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -71,7 +71,7 @@ public class pg_adminprin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pnl_contenedor = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(218, 175, 118));
@@ -84,7 +84,7 @@ public class pg_adminprin extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn_addcolaboradores.setBackground(new java.awt.Color(172, 95, 47));
-        btn_addcolaboradores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addcolaboradores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_addcolaboradores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_addcolaboradoresMouseClicked(evt);
@@ -105,7 +105,7 @@ public class pg_adminprin extends javax.swing.JFrame {
         jPanel2.add(btn_addcolaboradores, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 210, -1));
 
         btn_inicio.setBackground(new java.awt.Color(172, 95, 47));
-        btn_inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_inicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_inicioMouseClicked(evt);
@@ -128,21 +128,16 @@ public class pg_adminprin extends javax.swing.JFrame {
         lbl_nombre.setBackground(new java.awt.Color(255, 255, 255));
         lbl_nombre.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         lbl_nombre.setForeground(new java.awt.Color(218, 175, 118));
-        jPanel2.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 110, 40));
+        lbl_nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 210, 40));
 
         lbl_nombreproyecto.setBackground(new java.awt.Color(255, 255, 255));
         lbl_nombreproyecto.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         lbl_nombreproyecto.setForeground(new java.awt.Color(218, 175, 118));
         jPanel2.add(lbl_nombreproyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 210, 40));
 
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(218, 175, 118));
-        jLabel10.setText("Bienvenido(a)");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 120, 40));
-
         btn_cronograma.setBackground(new java.awt.Color(172, 95, 47));
-        btn_cronograma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cronograma.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_cronograma.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_cronogramaMouseClicked(evt);
@@ -163,7 +158,7 @@ public class pg_adminprin extends javax.swing.JFrame {
         jPanel2.add(btn_cronograma, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 210, -1));
 
         btn_addtarea.setBackground(new java.awt.Color(172, 95, 47));
-        btn_addtarea.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_addtarea.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_addtarea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_addtareaMouseClicked(evt);
@@ -184,7 +179,7 @@ public class pg_adminprin extends javax.swing.JFrame {
         jPanel2.add(btn_addtarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 210, -1));
 
         btn_crearpaquete.setBackground(new java.awt.Color(172, 95, 47));
-        btn_crearpaquete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_crearpaquete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_crearpaquete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_crearpaqueteMouseClicked(evt);
@@ -256,9 +251,17 @@ public class pg_adminprin extends javax.swing.JFrame {
 
     private void lbl_cerrarsesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_cerrarsesionMouseClicked
         new pg_login().setVisible(true);
-        this.dispose();
+        super.dispose();
     }//GEN-LAST:event_lbl_cerrarsesionMouseClicked
 
+    @Override
+    public void dispose()
+    {
+        Wbs.savedParameters.setVisible(true);
+        super.dispose();
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -300,7 +303,6 @@ public class pg_adminprin extends javax.swing.JFrame {
     private javax.swing.JPanel btn_crearpaquete;
     private javax.swing.JPanel btn_cronograma;
     private javax.swing.JPanel btn_inicio;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
