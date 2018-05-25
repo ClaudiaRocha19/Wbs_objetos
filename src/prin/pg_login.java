@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import modelos.Admin;
+import modelos.User;
 import paneles.CambiaPanel;
 import wbs.Wbs;
 /**
@@ -378,7 +380,7 @@ public class pg_login extends javax.swing.JFrame {
                         if (dig == '2') {
                             mensajeerror = true;
                             new pg_userprin().setVisible(true);
-                            
+                            Wbs.user = new User(name);
                             this.dispose();
                         }else if(dig == '1'){
                             mensajeerror = true;
@@ -386,6 +388,7 @@ public class pg_login extends javax.swing.JFrame {
                             pg_adminprin admp = new pg_adminprin();
                             admp.setVisible(true);
                             admp.setNombre(name);
+                            Wbs.admin = new Admin(name);
                             this.dispose();
                         }
                         
