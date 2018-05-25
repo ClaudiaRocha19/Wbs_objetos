@@ -58,7 +58,7 @@ public class pg_userprin extends javax.swing.JFrame {
 
         rSButtonIconD2.setText("rSButtonIconD2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(218, 175, 118));
@@ -208,6 +208,14 @@ public class pg_userprin extends javax.swing.JFrame {
         });
     }
 
+    @Override
+    public void dispose()
+    {
+        new pg_login().setVisible(true);
+        super.dispose();
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_addproyecto;
     private javax.swing.JPanel btn_editperfil;
