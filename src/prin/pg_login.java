@@ -21,8 +21,11 @@ import wbs.Wbs;
  * @author Leonidas
  */
 public class pg_login extends javax.swing.JFrame {
-    String name;
     
+    String name;
+    final int   admon = 1,
+                us = 2;
+    int userType = admon;
     
     
     /**
@@ -51,6 +54,7 @@ public class pg_login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btn_cerrar = new javax.swing.JLabel();
         btn_manuales = new rojeru_san.RSButton();
@@ -76,11 +80,23 @@ public class pg_login extends javax.swing.JFrame {
         txt_regemail = new javax.swing.JTextField();
         btn_back = new javax.swing.JLabel();
         btn_registrate = new rojeru_san.RSButton();
+        selAdmin = new javax.swing.JRadioButton();
+        selUser = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(934, 481));
         setUndecorated(true);
         setResizable(false);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(47, 19, 6));
         jPanel1.setMinimumSize(new java.awt.Dimension(934, 481));
@@ -170,6 +186,12 @@ public class pg_login extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("¿No estas registrado?");
         pnl_login.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 200, 20));
+
+        txt_pass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_passKeyPressed(evt);
+            }
+        });
         pnl_login.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 30));
 
         pnl_contenedor.add(pnl_login);
@@ -190,6 +212,12 @@ public class pg_login extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Contraseña");
         pnl_registrate.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 130, 20));
+
+        txt_regpass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_regpassKeyPressed(evt);
+            }
+        });
         pnl_registrate.add(txt_regpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 240, 30));
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -219,6 +247,29 @@ public class pg_login extends javax.swing.JFrame {
         });
         pnl_registrate.add(btn_registrate, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 240, -1));
 
+        buttonGroup1.add(selAdmin);
+        selAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        selAdmin.setSelected(true);
+        selAdmin.setText("Administrador");
+        selAdmin.setOpaque(false);
+        selAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selAdminMouseClicked(evt);
+            }
+        });
+        pnl_registrate.add(selAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
+
+        buttonGroup1.add(selUser);
+        selUser.setForeground(new java.awt.Color(255, 255, 255));
+        selUser.setText("Usuario");
+        selUser.setOpaque(false);
+        selUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selUserMouseClicked(evt);
+            }
+        });
+        pnl_registrate.add(selUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+
         pnl_contenedor.add(pnl_registrate);
 
         jPanel1.add(pnl_contenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 330, 420));
@@ -243,7 +294,22 @@ public class pg_login extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_registrateMouseClicked
 
     private void btn_registrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrateActionPerformed
+        registrarse();
+    }//GEN-LAST:event_btn_registrateActionPerformed
+
+    private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
+        pnl_registrate.setVisible(false);
+        pnl_login.setVisible(true);
+    }//GEN-LAST:event_btn_backMouseClicked
+
+    private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
+         
+        ingresar();
         
+    }//GEN-LAST:event_btn_ingresarActionPerformed
+
+    private void registrarse()
+    {
         if (txt_reguser.getText().isEmpty() || txt_regpass.getText().isEmpty() || txt_regemail.getText().isEmpty()) 
         {
              JOptionPane.showMessageDialog(this, "Por favor llene todos los campos de registro", "Parametros vacios", JOptionPane.ERROR_MESSAGE);
@@ -260,7 +326,7 @@ public class pg_login extends javax.swing.JFrame {
                 {
                     if (wbs.welcomeMail(txt_regemail.getText(),txt_reguser.getText())) 
                     {
-                        wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText()+",2,", "usuarios.txt");
+                        wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText()+","+userType+",", "usuarios.txt");
                         JOptionPane.showMessageDialog(null,"Registro exitoso");
                         pnl_registrate.setVisible(false);
                         pnl_login.setVisible(true);
@@ -285,15 +351,11 @@ public class pg_login extends javax.swing.JFrame {
             }
         }
         
-    }//GEN-LAST:event_btn_registrateActionPerformed
-
-    private void btn_backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_backMouseClicked
-        pnl_registrate.setVisible(false);
-        pnl_login.setVisible(true);
-    }//GEN-LAST:event_btn_backMouseClicked
-
-    private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
-         if (txt_user.getText().isEmpty() || txt_pass.getText().isEmpty()) {
+    }
+    
+    private void ingresar()
+    {
+        if (txt_user.getText().isEmpty() || txt_pass.getText().isEmpty()) {
              //USE GET TEXT PARA UN PASSWORD, PERDONAME LA VIDA DEPUES LO CAMBIO.
              //yo tampoco tengo ni idea de como cambiarlo, el paswordField lo cifra
             lbl_mensajeerror.setText("Debe llenar los dos campos");
@@ -335,18 +397,69 @@ public class pg_login extends javax.swing.JFrame {
                 txt_pass.setText("");
             }
              } catch (FileNotFoundException ex) {
-                 Logger.getLogger(pg_login.class.getName()).log(Level.SEVERE, null, ex);
+                 
+                 System.out.println("archivo de usuarios no encontrado");
+                 ex.printStackTrace();
+                 
              } catch (IOException ex) {
-                 Logger.getLogger(pg_login.class.getName()).log(Level.SEVERE, null, ex);
+                 System.out.println("error en la ejecuciòn del stream");
+                 ex.printStackTrace();
              }
            
         }
-    }//GEN-LAST:event_btn_ingresarActionPerformed
-
+    }
+    
     private void btn_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_btn_cerrarMouseClicked
 
+    private void selAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selAdminMouseClicked
+        
+        if (selAdmin.isSelected()) 
+        {
+            userType = admon;
+        }
+        
+    }//GEN-LAST:event_selAdminMouseClicked
+
+    private void selUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selUserMouseClicked
+        
+        if (selUser.isSelected()) 
+        {
+            userType = us;
+        }
+        
+    }//GEN-LAST:event_selUserMouseClicked
+
+    private void txt_regpassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_regpassKeyPressed
+        if (evt.getKeyCode() == 10) 
+        {
+            registrarse();
+        }
+    }//GEN-LAST:event_txt_regpassKeyPressed
+
+    private void txt_passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passKeyPressed
+        
+        if (evt.getKeyCode() == 10) 
+        {
+            ingresar();
+        }
+        
+    }//GEN-LAST:event_txt_passKeyPressed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        
+        this.setLocation(evt.getXOnScreen()-xin,evt.getYOnScreen()-yin);
+        
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        xin=evt.getX();
+        yin=evt.getY();
+    }//GEN-LAST:event_formMousePressed
+
+    int xin,yin;
+    
     /**
      * @param args the command line arguments
      */
@@ -392,6 +505,7 @@ public class pg_login extends javax.swing.JFrame {
     private rojeru_san.RSButton btn_ingresar;
     private rojeru_san.RSButton btn_manuales;
     private rojeru_san.RSButton btn_registrate;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -407,6 +521,8 @@ public class pg_login extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_contenedor;
     private javax.swing.JPanel pnl_login;
     private javax.swing.JPanel pnl_registrate;
+    private javax.swing.JRadioButton selAdmin;
+    private javax.swing.JRadioButton selUser;
     private javax.swing.JPasswordField txt_pass;
     private javax.swing.JTextField txt_regemail;
     private javax.swing.JTextField txt_regpass;
