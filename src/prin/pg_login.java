@@ -379,13 +379,13 @@ public class pg_login extends javax.swing.JFrame {
                           name = txt_user.getText();
                         if (dig == '2') {
                             mensajeerror = true;
-                            new pg_userprin().setVisible(true);
+                            new pg_ComunUser().setVisible(true);
                             Wbs.user = new User(name);
                             this.dispose();
                         }else if(dig == '1'){
                             mensajeerror = true;
                             
-                            pg_adminprin admp = new pg_adminprin();
+                            pg_userprin admp = new pg_userprin();
                             admp.setVisible(true);
                             admp.setNombre(name);
                             Wbs.admin = new Admin(name);
