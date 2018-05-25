@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 public class Verificacion {
     
     /**CLASE DE VERIFICACIONES
-     * RICARDO GUEVARA PAYAN
      * MÉTODOS NO ESTÁTICOS PARA VERIFICACIONES
      */
     
