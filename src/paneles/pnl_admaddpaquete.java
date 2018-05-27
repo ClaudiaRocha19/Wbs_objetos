@@ -5,9 +5,12 @@
  */
 package paneles;
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
+import modelos.Pack;
+import modelos.Project;
 import wbs.Wbs;
 
 /**
@@ -34,7 +37,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel8 = new javax.swing.JLabel();
-        txt_user = new javax.swing.JTextField();
+        newPackName = new javax.swing.JTextField();
         btn_crear = new rojeru_san.RSButton();
         jLabel9 = new javax.swing.JLabel();
         btn_addproyecto = new javax.swing.JPanel();
@@ -42,13 +45,13 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         searchUser = new javax.swing.JTextField();
         options = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        pred = new javax.swing.JRadioButton();
+        pers = new javax.swing.JRadioButton();
         asunto = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        mensaje = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
         newCols = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
@@ -63,8 +66,8 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jLabel8.setText("Agregar colaborador:");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, 40));
 
-        txt_user.setToolTipText("Nombre del paquete");
-        add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 310, 40));
+        newPackName.setToolTipText("Nombre del paquete");
+        add(newPackName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 310, 40));
 
         btn_crear.setBackground(new java.awt.Color(172, 95, 47));
         btn_crear.setText("Crear paquete");
@@ -124,16 +127,26 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jLabel10.setText("Notificación de ingreso:");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 23, -1, 40));
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Predeterminado");
-        jRadioButton1.setOpaque(false);
-        add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, -1));
+        buttonGroup1.add(pred);
+        pred.setSelected(true);
+        pred.setText("Predeterminado");
+        pred.setOpaque(false);
+        pred.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                predMouseClicked(evt);
+            }
+        });
+        add(pred, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, -1));
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Personalizar");
-        jRadioButton2.setOpaque(false);
-        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
+        buttonGroup1.add(pers);
+        pers.setText("Personalizar");
+        pers.setOpaque(false);
+        pers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                persMouseClicked(evt);
+            }
+        });
+        add(pers, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
 
         asunto.setEditable(false);
         add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 208, 34));
@@ -148,10 +161,10 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jLabel13.setText("Asunto:");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, 40));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        mensaje.setEditable(false);
+        mensaje.setColumns(20);
+        mensaje.setRows(5);
+        jScrollPane1.setViewportView(mensaje);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 210, 120));
 
@@ -169,8 +182,19 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
-
-        // metodo para crear paquete
+        
+        ((Project)Wbs.tree.getInfo()).addPack(newPackName.getText());
+        
+        ArrayList<String> addstuff = new ArrayList<>();
+        for (int i = 0; i < newCols.getItemCount(); i++) 
+        {
+            addstuff.add(newCols.getItemAt(i));
+        }
+        
+        ((Project)Wbs.tree.getInfo()).addcols(addstuff);
+        
+        
+        
     }//GEN-LAST:event_btn_crearActionPerformed
 
     private void btn_addproyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addproyectoMouseClicked
@@ -229,7 +253,26 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         
     }//GEN-LAST:event_optionsActionPerformed
 
-    
+    private void persMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_persMouseClicked
+        
+        if (pers.isSelected()) 
+        {
+           asunto.setEditable(true);
+           mensaje.setEditable(true);
+        }
+        
+    }//GEN-LAST:event_persMouseClicked
+
+    private void predMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_predMouseClicked
+        
+        if (pred.isSelected()) 
+        {
+           asunto.setEditable(false);
+           mensaje.setEditable(false);
+        }
+        
+    }//GEN-LAST:event_predMouseClicked
+
     
     private int labelReference;
     Wbs wbs = new Wbs();
@@ -246,14 +289,14 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea mensaje;
     private javax.swing.JComboBox<String> newCols;
+    private javax.swing.JTextField newPackName;
     private javax.swing.JComboBox<String> options;
+    private javax.swing.JRadioButton pers;
+    private javax.swing.JRadioButton pred;
     private javax.swing.JTextField searchUser;
-    private javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
 }

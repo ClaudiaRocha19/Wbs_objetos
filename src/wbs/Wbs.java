@@ -44,7 +44,7 @@ public class Wbs {
     public static Admin admin;
     
     
-    private MailService ms= new MailService();
+    public MailService ms= new MailService();
     
 //USABLE METHODS________________________________________________________________    
     

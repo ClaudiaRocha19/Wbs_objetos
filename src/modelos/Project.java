@@ -17,6 +17,7 @@ public class Project {
     
     String  name;
     ArrayList<Pack> packs = new ArrayList<>();
+    ArrayList<User> cols = new ArrayList<>();
     Nodo nativo;
 
     public Project(String name, Nodo nativo) {
@@ -37,6 +38,19 @@ public class Project {
         packs.add(nuevo);
     }
 
+    public void addcol(User us)
+    {
+        cols.add(us);
+    }
+    
+    public void addcols(ArrayList<String> users)
+    {
+        for (String user : users) 
+        {
+            addcol(new User(user));
+        }
+    }        
+    
     public String getName() {
         return name;
     }
