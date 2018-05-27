@@ -101,6 +101,7 @@ public class pg_login extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(47, 19, 6));
+        jPanel1.setFocusable(false);
         jPanel1.setMinimumSize(new java.awt.Dimension(934, 481));
         jPanel1.setPreferredSize(new java.awt.Dimension(934, 481));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
