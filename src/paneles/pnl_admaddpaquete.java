@@ -5,6 +5,11 @@
  */
 package paneles;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.ListModel;
+import wbs.Wbs;
+
 /**
  *
  * @author Leonidas
@@ -30,22 +35,22 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel8 = new javax.swing.JLabel();
         txt_user = new javax.swing.JTextField();
-        btn_ingresar = new rojeru_san.RSButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        btn_crear = new rojeru_san.RSButton();
         jLabel9 = new javax.swing.JLabel();
         btn_addproyecto = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txt_user1 = new javax.swing.JTextField();
+        searchUser = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(218, 175, 118));
         setMinimumSize(new java.awt.Dimension(689, 521));
@@ -59,20 +64,17 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         txt_user.setToolTipText("Nombre del paquete");
         add(txt_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 310, 40));
 
-        btn_ingresar.setBackground(new java.awt.Color(172, 95, 47));
-        btn_ingresar.setText("Crear paquete");
-        btn_ingresar.setToolTipText("crear");
-        btn_ingresar.setColorHover(new java.awt.Color(208, 124, 66));
-        btn_ingresar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btn_ingresar.addActionListener(new java.awt.event.ActionListener() {
+        btn_crear.setBackground(new java.awt.Color(172, 95, 47));
+        btn_crear.setText("Crear paquete");
+        btn_crear.setToolTipText("crear");
+        btn_crear.setColorHover(new java.awt.Color(208, 124, 66));
+        btn_crear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_crear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ingresarActionPerformed(evt);
+                btn_crearActionPerformed(evt);
             }
         });
-        add(btn_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 250, -1));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 326, 310, 34));
+        add(btn_crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 250, -1));
 
         jLabel9.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(47, 19, 6));
@@ -91,8 +93,13 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Plus_24px.png"))); // NOI18N
         btn_addproyecto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 50, 40));
 
-        txt_user1.setToolTipText("Buscar colaborador");
-        btn_addproyecto.add(txt_user1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
+        searchUser.setToolTipText("Buscar colaborador");
+        searchUser.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                searchUserCaretUpdate(evt);
+            }
+        });
+        btn_addproyecto.add(searchUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
 
         add(btn_addproyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 310, 40));
 
@@ -120,11 +127,6 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jLabel11.setText("Mensaje:");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, -1, 40));
 
-        jLabel12.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(47, 19, 6));
-        jLabel12.setText("Colaboradores:");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 275, -1, 40));
-
         jLabel13.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(47, 19, 6));
         jLabel13.setText("Asunto:");
@@ -135,27 +137,46 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 210, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 210, 120));
 
         jSeparator1.setBackground(new java.awt.Color(172, 95, 47));
         jSeparator1.setForeground(new java.awt.Color(172, 95, 47));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 10, 330));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 10, 360));
+
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 310, 34));
+
+        jLabel12.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel12.setText("Colaboradores:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
+    private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
 
         // metodo para crear paquete
-    }//GEN-LAST:event_btn_ingresarActionPerformed
+    }//GEN-LAST:event_btn_crearActionPerformed
 
     private void btn_addproyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addproyectoMouseClicked
         
     }//GEN-LAST:event_btn_addproyectoMouseClicked
 
+    private void searchUserCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchUserCaretUpdate
+        
+        for (String search : wbs.getRelativeUsers(searchUser.getText())) 
+        {
+            
+        }
+
+    }//GEN-LAST:event_searchUserCaretUpdate
+
+    
+    private int labelReference;
+    Wbs wbs = new Wbs();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_addproyecto;
-    private rojeru_san.RSButton btn_ingresar;
+    private rojeru_san.RSButton btn_crear;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
@@ -171,7 +192,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField searchUser;
     private javax.swing.JTextField txt_user;
-    private javax.swing.JTextField txt_user1;
     // End of variables declaration//GEN-END:variables
 }

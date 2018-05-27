@@ -103,6 +103,39 @@ public class Wbs {
         e.close();
     }
     
+    public ArrayList<String> getRelativeUsers(String base)
+    {
+        try 
+        {
+            ArrayList<String> relatives = new ArrayList<>();
+            BufferedReader leer = new BufferedReader(new FileReader("usuarios.txt"));
+            String comparable;
+            
+            while((comparable=leer.readLine())!=null)
+            {
+                String section=comparable.substring(0, comparable.indexOf(","));
+                
+                if (section.startsWith(base)) 
+                {
+                    relatives.add(section);
+                    //System.out.println(section);
+                }
+            }
+            return relatives;
+        }
+        catch (IOException ioe) 
+        {
+            System.out.println("error en la lectura del archivo");
+            ioe.printStackTrace();
+        }
+        catch(NullPointerException npe)
+        {
+            System.out.println("no se envió ninguna cadena al método");
+        }
+        return null;
+    }
+    
+    
     
     public boolean welcomeMail(String destiny, String name)
     {
@@ -134,6 +167,8 @@ public class Wbs {
             return false;
         }
     }
+
+//PROJECT METHODS_______________________________________________________________
     
     public void createProject(Project project)
     {
