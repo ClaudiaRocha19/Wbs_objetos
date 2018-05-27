@@ -44,17 +44,18 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
+        asunto = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        newCols = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(218, 175, 118));
         setMinimumSize(new java.awt.Dimension(689, 521));
+        setPreferredSize(new java.awt.Dimension(689, 521));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
@@ -100,10 +101,20 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
                 searchUserCaretUpdate(evt);
             }
         });
+        searchUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchUserKeyPressed(evt);
+            }
+        });
         btn_addproyecto.add(searchUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
 
         options.setFocusable(false);
         options.setOpaque(false);
+        options.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionsActionPerformed(evt);
+            }
+        });
         btn_addproyecto.add(options, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 260, 20));
 
         add(btn_addproyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 310, 40));
@@ -124,8 +135,8 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jRadioButton2.setOpaque(false);
         add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
 
-        jTextField1.setEditable(false);
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 208, 34));
+        asunto.setEditable(false);
+        add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 208, 34));
 
         jLabel11.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(47, 19, 6));
@@ -149,7 +160,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 10, 360));
 
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 310, 34));
+        add(newCols, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 310, 34));
 
         jLabel12.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(47, 19, 6));
@@ -163,7 +174,8 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_crearActionPerformed
 
     private void btn_addproyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addproyectoMouseClicked
-        
+        newCols.addItem(searchUser.getText());
+        newCols.showPopup();
     }//GEN-LAST:event_btn_addproyectoMouseClicked
 
     private void searchUserCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchUserCaretUpdate
@@ -193,15 +205,40 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         
     }//GEN-LAST:event_searchUserCaretUpdate
 
+    private void searchUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUserKeyPressed
+        
+        if (evt.getKeyCode()==10) 
+        {
+            newCols.addItem(searchUser.getText());
+            newCols.showPopup();
+        }
+        
+    }//GEN-LAST:event_searchUserKeyPressed
+
+    private void optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsActionPerformed
+        try 
+        {
+            String n=(options.getItemAt(options.getSelectedIndex()));
+            System.out.println(n);
+            searchUser.setText(n);    
+        }
+        catch (Exception e) 
+        {
+            System.out.println("sin seleccion");
+        }
+        
+    }//GEN-LAST:event_optionsActionPerformed
+
+    
     
     private int labelReference;
     Wbs wbs = new Wbs();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField asunto;
     private javax.swing.JPanel btn_addproyecto;
     private rojeru_san.RSButton btn_crear;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -214,7 +251,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> newCols;
     private javax.swing.JComboBox<String> options;
     private javax.swing.JTextField searchUser;
     private javax.swing.JTextField txt_user;
