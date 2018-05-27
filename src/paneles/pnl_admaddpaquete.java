@@ -40,6 +40,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         btn_addproyecto = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         searchUser = new javax.swing.JTextField();
+        options = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -100,6 +101,10 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
             }
         });
         btn_addproyecto.add(searchUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
+
+        options.setFocusable(false);
+        options.setOpaque(false);
+        btn_addproyecto.add(options, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 260, 20));
 
         add(btn_addproyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 310, 40));
 
@@ -163,11 +168,29 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
 
     private void searchUserCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchUserCaretUpdate
         
-        for (String search : wbs.getRelativeUsers(searchUser.getText())) 
+        options.hidePopup();
+        options.removeAllItems();
+        
+        //options.addItem("mensaje secreto 100% real no fake");
+        
+        if (!searchUser.getText().isEmpty()) 
         {
-            
+            for (String search : wbs.getRelativeUsers(searchUser.getText())) 
+            {
+                options.addItem(search);
+            }
+            if (options.getItemAt(0)!=null) 
+            {
+                options.showPopup();   
+            }
         }
-
+        else
+        {
+            options.hidePopup();
+        }
+        options.setSelectedIndex(-1);
+        searchUser.requestFocus();
+        
     }//GEN-LAST:event_searchUserCaretUpdate
 
     
@@ -192,6 +215,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> options;
     private javax.swing.JTextField searchUser;
     private javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
