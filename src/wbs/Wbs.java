@@ -43,7 +43,6 @@ public class Wbs {
     public static User user;
     public static Admin admin;
     
-    
     public MailService ms= new MailService();
     
 //USABLE METHODS________________________________________________________________    
@@ -141,17 +140,7 @@ public class Wbs {
     {
         try
         {
-            if(ms.sendMail
-                (
-                    new MailModel
-                    (
-                        "Bienvenido a WBS project management "+name,
-                        "Gracias por registrarse en WBS "
-                            +name
-                            +" /nle mantendremos informado sobre actualizaciones en tus proyectos ",
-                        destiny
-                    )
-                ))
+            if(ms.sendMail(new MailModel(MailType.WELCOME,destiny,name,"")))
             {    
                 return true;
             }

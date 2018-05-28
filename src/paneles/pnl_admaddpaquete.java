@@ -5,10 +5,16 @@
  */
 package paneles;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
+import mail.MailModel;
+import mail.MailType;
 import modelos.Pack;
 import modelos.Project;
 import wbs.Wbs;
@@ -193,7 +199,51 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         
         ((Project)Wbs.tree.getInfo()).addcols(addstuff);
         
-        
+        try {
+            String pron= ((Project)(Wbs.tree.getInfo())).getName();
+            String linea;
+            BufferedReader leer = new BufferedReader(new FileReader("usuarios.txt"));
+            
+            if (pred.isSelected()) {
+                while((linea=leer.readLine())!=null)
+                {
+                    ArrayList<String> campos =wbs.separar(linea);
+                    for (String string : addstuff) 
+                    {
+                        if ((campos.get(0)).equals(string)) 
+                        {
+                            wbs.ms.sendMail(new MailModel(MailType.NEW_PROJECT_COLABORATOR,campos.get(2),campos.get(0),pron));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                while((linea=leer.readLine())!=null)
+                {
+                    ArrayList<String> campos =wbs.separar(linea);
+                    for (String string : addstuff) 
+                    {
+                        if ((campos.get(0)).equals(string)) 
+                        {
+                            wbs.ms.sendMail(new MailModel(campos.get(0)+", "+asunto.getText(),mensaje.getText(),campos.get(2)));
+                        }
+                    }
+                }
+            }
+            leer.close();
+            
+            JOptionPane.showMessageDialog(this, " Paquete nuevo creado\n se ha notificado a los nuevos colaboradores", "Notificaciones enviadas", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (IOException ioe) 
+        {
+            System.out.println("error en la lectura de archivo");
+            ioe.printStackTrace();
+        }catch (Exception e)
+        {
+            System.out.println("error en el envio del correo");
+            e.printStackTrace();
+        }
         
     }//GEN-LAST:event_btn_crearActionPerformed
 

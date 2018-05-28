@@ -5,6 +5,8 @@
  */
 package mail;
 
+import wbs.Wbs;
+
 /**
  *
  * @author RICARDO
@@ -40,7 +42,6 @@ public class MailModel {
         this.userName= "WBSprojectman";
         this.password= "IKARUS FALLING";
         this.subject = subject;
-        this.fileUrl = "";
         this.msj = msj;
         this.destiny = destiny;
     }
@@ -55,7 +56,26 @@ public class MailModel {
         this.destiny = destiny;
     }
 
-    
+    public MailModel(MailType mt, String destiny, String name, String secName)
+    {
+        this.userName= "WBSprojectman";
+        this.password= "IKARUS FALLING";
+        
+        switch(mt)
+        {
+            case WELCOME:
+                this.subject = "Bienvenido a wbs "+name;
+                this.msj = "Gracias por registrarse";
+                break;
+            case NEW_PROJECT_COLABORATOR:
+                this.subject = "Te han añadido a un nuevo proyecto "+name;
+                this.msj = "Felicidades, te han añadido como colaborador al proyecto: "+secName;
+                break;    
+                
+        }
+        
+        this.destiny = destiny;
+    }
     
 
 //GS____________________________________________________________________________    

@@ -23,6 +23,7 @@ public class Project {
     public Project(String name, Nodo nativo) {
         this.name = name;
         this.nativo = nativo;
+        nativo.setInfo(this);
     }
     
     public Project(String name) {
