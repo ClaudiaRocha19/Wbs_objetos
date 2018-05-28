@@ -5,8 +5,10 @@
  */
 package prin;
 
+import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -37,6 +39,10 @@ public class pg_userprin extends javax.swing.JFrame {
 
     public void setNombre(String nombre) {
         this.lbl_nombre.setText(nombre);
+        
+//        ImageIcon image= new ImageIcon(getClass().getResource("foto.png"));
+//        ImageIcon newImage = new ImageIcon(image.getImage().getScaledInstance(lbl_foto.getWidth(), lbl_foto.getHeight(), Image.SCALE_DEFAULT));
+//        lbl_foto.setIcon(newImage);
     }
     
     /**
@@ -133,7 +139,7 @@ public class pg_userprin extends javax.swing.JFrame {
         lbl_nombre.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         lbl_nombre.setForeground(new java.awt.Color(218, 175, 118));
         lbl_nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 150, 40));
+        jPanel2.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 190, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 545));
 
