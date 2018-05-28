@@ -67,6 +67,22 @@ public class Project {
     public void setPacks(ArrayList<Pack> packs) {
         this.packs = packs;
     }
+
+    public ArrayList<User> getCols() {
+        return cols;
+    }
+
+    public void setCols(ArrayList<User> cols) {
+        this.cols = cols;
+    }
+
+    public Nodo getNativo() {
+        return nativo;
+    }
+
+    public void setNativo(Nodo nativo) {
+        this.nativo = nativo;
+    }
     
     
     

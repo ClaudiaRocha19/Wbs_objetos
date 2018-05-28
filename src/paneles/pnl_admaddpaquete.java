@@ -9,13 +9,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 import mail.MailModel;
 import mail.MailType;
-import modelos.Pack;
 import modelos.Project;
 import wbs.Wbs;
 
