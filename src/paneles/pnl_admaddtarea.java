@@ -7,6 +7,7 @@ package paneles;
 
 import java.awt.Color;
 
+
 /**
  *
  * @author Leonidas
