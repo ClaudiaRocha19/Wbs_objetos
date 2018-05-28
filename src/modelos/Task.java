@@ -23,6 +23,8 @@ public class Task {
     
     private Pack    pack;
 
+    private Prioridad prioridad;
+    
     SubNodo nativo;
     
     public Task(User attendant, Date startDate, Date endDate, String taskName, Pack pack) 

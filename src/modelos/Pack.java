@@ -41,6 +41,39 @@ public class Pack {
         tasks.add(task);
         task.nativo = nuevo;
     }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public SubNodo getSubnativo() {
+        return subnativo;
+    }
+
+    public void setSubnativo(SubNodo subnativo) {
+        this.subnativo = subnativo;
+    }
+    
     
     
     

@@ -42,7 +42,14 @@ public class pg_userprin extends javax.swing.JFrame {
 
     public void setNombre(String nombre) {
         this.lbl_nombre.setText(nombre);
-        rsscalelabel.RSScaleLabel.setScaleLabel(lbl_foto,"foto.png");
+        try 
+        {
+            rsscalelabel.RSScaleLabel.setScaleLabel(lbl_foto,"allusers/"+nombre+"/foto.png");
+        } catch (Exception e) 
+        {
+            rsscalelabel.RSScaleLabel.setScaleLabel(lbl_foto,"src/img/defaultuser.png");
+        }
+        
 //        ImageIcon image= new ImageIcon(getClass().getResource("foto.png"));
 //        ImageIcon newImage = new ImageIcon(image.getImage().getScaledInstance(lbl_foto.getWidth(), lbl_foto.getHeight(), Image.SCALE_DEFAULT));
 //        lbl_foto.setIcon(newImage);
