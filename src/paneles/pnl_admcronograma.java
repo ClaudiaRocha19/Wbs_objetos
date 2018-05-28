@@ -16,6 +16,7 @@ public class pnl_admcronograma extends javax.swing.JPanel {
      */
     public pnl_admcronograma() {
         initComponents();
+        new CambiaPanel(pnl_container, new pnl_prioridad());
     }
 
     /**
@@ -27,32 +28,57 @@ public class pnl_admcronograma extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rSCalendar1 = new rojeru_san.componentes.RSCalendar();
+        btn_vercalendario = new rojeru_san.RSButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        pnl_container = new javax.swing.JPanel();
+        btn_verprioridad = new rojeru_san.RSButton();
 
-        setBackground(new java.awt.Color(218, 175, 118));
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(689, 521));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        rSCalendar1.setBackground(new java.awt.Color(245, 246, 212));
-        rSCalendar1.setAltoFilas(50);
-        rSCalendar1.setAutoscrolls(true);
-        rSCalendar1.setColorBackground(new java.awt.Color(133, 219, 24));
-        rSCalendar1.setColorButtonHover(new java.awt.Color(167, 197, 32));
-        rSCalendar1.setColorDiaActual(new java.awt.Color(205, 232, 85));
+        btn_vercalendario.setBackground(new java.awt.Color(204, 51, 0));
+        btn_vercalendario.setText("Ver calendario");
+        btn_vercalendario.setColorHover(new java.awt.Color(255, 153, 0));
+        btn_vercalendario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_vercalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_vercalendarioActionPerformed(evt);
+            }
+        });
+        add(btn_vercalendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, 250, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rSCalendar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rSCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
-        );
+        pnl_container.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_container.setLayout(new javax.swing.BoxLayout(pnl_container, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane1.setViewportView(pnl_container);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 650, 460));
+
+        btn_verprioridad.setBackground(new java.awt.Color(204, 51, 0));
+        btn_verprioridad.setText("ver prioridad");
+        btn_verprioridad.setColorHover(new java.awt.Color(255, 153, 0));
+        btn_verprioridad.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_verprioridad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_verprioridadActionPerformed(evt);
+            }
+        });
+        add(btn_verprioridad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 250, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_vercalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vercalendarioActionPerformed
+        new CambiaPanel(pnl_container, new pnl_calendario());
+    }//GEN-LAST:event_btn_vercalendarioActionPerformed
+
+    private void btn_verprioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verprioridadActionPerformed
+        new CambiaPanel(pnl_container, new pnl_prioridad());
+    }//GEN-LAST:event_btn_verprioridadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojeru_san.componentes.RSCalendar rSCalendar1;
+    private rojeru_san.RSButton btn_vercalendario;
+    private rojeru_san.RSButton btn_verprioridad;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnl_container;
     // End of variables declaration//GEN-END:variables
 }
