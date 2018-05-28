@@ -72,6 +72,11 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
         combo_paquete.setColorArrow(new java.awt.Color(90, 31, 0));
         combo_paquete.setColorBorde(new java.awt.Color(209, 87, 13));
         combo_paquete.setColorFondo(new java.awt.Color(209, 87, 13));
+        combo_paquete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                combo_paqueteMouseClicked(evt);
+            }
+        });
         combo_paquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 combo_paqueteActionPerformed(evt);
@@ -134,6 +139,11 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
         btn_addtarea.setText("Añadir tarea");
         btn_addtarea.setColorHover(new java.awt.Color(255, 153, 0));
         btn_addtarea.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_addtarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addtareaActionPerformed(evt);
+            }
+        });
         add(btn_addtarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 250, -1));
 
         pnl_prioricolor.setBackground(new java.awt.Color(255, 255, 255));
@@ -252,8 +262,29 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
 
     }//GEN-LAST:event_optionsActionPerformed
 
+    private void btn_addtareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtareaActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_btn_addtareaActionPerformed
+
+    private void combo_paqueteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combo_paqueteMouseClicked
+        
+        for (Pack pack : ((Project)Wbs.tree.getInfo()).getPacks()) 
+        {
+            if (pack.getName().equals(combo_paquete.getItemAt(combo_paquete.getSelectedIndex()))) 
+            {
+                paquete =pack;
+            }
+        }
+        
+        
+    }//GEN-LAST:event_combo_paqueteMouseClicked
+
     Prioridad prioridad= Prioridad.ALTA;
     Wbs wbs = new Wbs();
+    Pack paquete;
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_addproyecto;
