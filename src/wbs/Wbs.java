@@ -43,8 +43,7 @@ public class Wbs {
     public static User user;
     public static Admin admin;
     
-    
-    private MailService ms= new MailService();
+    public MailService ms= new MailService();
     
 //USABLE METHODS________________________________________________________________    
     
@@ -103,22 +102,45 @@ public class Wbs {
         e.close();
     }
     
+    public ArrayList<String> getRelativeUsers(String base)
+    {
+        try 
+        {
+            ArrayList<String> relatives = new ArrayList<>();
+            BufferedReader leer = new BufferedReader(new FileReader("usuarios.txt"));
+            String comparable;
+            
+            while((comparable=leer.readLine())!=null)
+            {
+                String section=comparable.substring(0, comparable.indexOf(","));
+                
+                if (section.startsWith(base)) 
+                {
+                    relatives.add(section);
+                    //System.out.println(section);
+                }
+            }
+            return relatives;
+        }
+        catch (IOException ioe) 
+        {
+            System.out.println("error en la lectura del archivo");
+            ioe.printStackTrace();
+        }
+        catch(NullPointerException npe)
+        {
+            System.out.println("no se envió ninguna cadena al método");
+        }
+        return null;
+    }
+    
+    
     
     public boolean welcomeMail(String destiny, String name)
     {
         try
         {
-            if(ms.sendMail
-                (
-                    new MailModel
-                    (
-                        "Bienvenido a WBS project management "+name,
-                        "Gracias por registrarse en WBS "
-                            +name
-                            +" /nle mantendremos informado sobre actualizaciones en tus proyectos ",
-                        destiny
-                    )
-                ))
+            if(ms.sendMail(new MailModel(MailType.WELCOME,destiny,name,"")))
             {    
                 return true;
             }
@@ -134,6 +156,8 @@ public class Wbs {
             return false;
         }
     }
+
+//PROJECT METHODS_______________________________________________________________
     
     public void createProject(Project project)
     {
@@ -148,5 +172,12 @@ public class Wbs {
         pgp.setNombre(project.getName());
         pgp.setVisible(true);
     }
+    
+    public void saveProject()
+    {
+        
+        
+    }
+    
     
 }

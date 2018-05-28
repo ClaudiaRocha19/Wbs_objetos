@@ -17,11 +17,13 @@ public class Project {
     
     String  name;
     ArrayList<Pack> packs = new ArrayList<>();
+    ArrayList<User> cols = new ArrayList<>();
     Nodo nativo;
 
     public Project(String name, Nodo nativo) {
         this.name = name;
         this.nativo = nativo;
+        nativo.setInfo(this);
     }
     
     public Project(String name) {
@@ -37,6 +39,19 @@ public class Project {
         packs.add(nuevo);
     }
 
+    public void addcol(User us)
+    {
+        cols.add(us);
+    }
+    
+    public void addcols(ArrayList<String> users)
+    {
+        for (String user : users) 
+        {
+            addcol(new User(user));
+        }
+    }        
+    
     public String getName() {
         return name;
     }
@@ -51,6 +66,22 @@ public class Project {
 
     public void setPacks(ArrayList<Pack> packs) {
         this.packs = packs;
+    }
+
+    public ArrayList<User> getCols() {
+        return cols;
+    }
+
+    public void setCols(ArrayList<User> cols) {
+        this.cols = cols;
+    }
+
+    public Nodo getNativo() {
+        return nativo;
+    }
+
+    public void setNativo(Nodo nativo) {
+        this.nativo = nativo;
     }
     
     

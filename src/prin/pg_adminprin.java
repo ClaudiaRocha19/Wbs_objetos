@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import modelos.Project;
 import paneles.*;
 import wbs.Wbs;
 
@@ -21,6 +22,8 @@ public class pg_adminprin extends javax.swing.JFrame {
 
     public void setNombre(String nombre) {
         this.lbl_nombre.setText(nombre);
+        p=new Project(nombre,Wbs.tree);
+        
     }
 
     /**
@@ -297,6 +300,7 @@ public class pg_adminprin extends javax.swing.JFrame {
         });
     }
 
+    Project p;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_addcolaboradores;
     private javax.swing.JPanel btn_addtarea;

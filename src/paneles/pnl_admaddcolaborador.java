@@ -5,6 +5,18 @@
  */
 package paneles;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import mail.MailModel;
+import mail.MailType;
+import modelos.Project;
+import modelos.User;
+import wbs.Wbs;
+
 /**
  *
  * @author Leonidas
@@ -16,8 +28,19 @@ public class pnl_admaddcolaborador extends javax.swing.JPanel {
      */
     public pnl_admaddcolaborador() {
         initComponents();
+        poblar_cols();
     }
 
+    private void poblar_cols()
+    {
+        DefaultListModel dlm = new DefaultListModel();
+        for (User user : ((Project)Wbs.tree.getInfo()).getCols()) 
+        {
+            dlm.addElement(user.getName());
+        }
+        colList.setModel(dlm);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,6 +51,17 @@ public class pnl_admaddcolaborador extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel8 = new javax.swing.JLabel();
+        btn_addproyecto = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        searchUser = new javax.swing.JTextField();
+        options = new javax.swing.JComboBox<>();
+        jSeparator1 = new javax.swing.JSeparator();
+        newCols = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        colList = new javax.swing.JList<>();
+        btn_crear = new rojeru_san.RSButton();
 
         setBackground(new java.awt.Color(218, 175, 118));
         setMinimumSize(new java.awt.Dimension(689, 521));
@@ -35,28 +69,234 @@ public class pnl_admaddcolaborador extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(47, 19, 6));
-        jLabel8.setText("Colaborador");
+        jLabel8.setText("Agregar colaboradores al proyecto:");
+
+        btn_addproyecto.setBackground(new java.awt.Color(172, 95, 47));
+        btn_addproyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addproyectoMouseClicked(evt);
+            }
+        });
+        btn_addproyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Plus_24px.png"))); // NOI18N
+        btn_addproyecto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 50, 40));
+
+        searchUser.setToolTipText("Buscar colaborador");
+        searchUser.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                searchUserCaretUpdate(evt);
+            }
+        });
+        searchUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchUserKeyPressed(evt);
+            }
+        });
+        btn_addproyecto.add(searchUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
+
+        options.setFocusable(false);
+        options.setOpaque(false);
+        options.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionsActionPerformed(evt);
+            }
+        });
+        btn_addproyecto.add(options, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 260, 20));
+
+        jSeparator1.setBackground(new java.awt.Color(172, 95, 47));
+        jSeparator1.setForeground(new java.awt.Color(172, 95, 47));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabel12.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel12.setText("Colaboradores actuales:");
+
+        jLabel13.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel13.setText("Colaboradores nuevos:");
+
+        jScrollPane1.setViewportView(colList);
+
+        btn_crear.setBackground(new java.awt.Color(172, 95, 47));
+        btn_crear.setText("Listo");
+        btn_crear.setToolTipText("crear");
+        btn_crear.setColorHover(new java.awt.Color(208, 124, 66));
+        btn_crear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(270, 270, 270)
-                .addComponent(jLabel8)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(newCols, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13)
+                    .addComponent(btn_addproyecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_crear, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(173, 173, 173))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(76, 76, 76)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(29, 29, 29)
+                            .addComponent(btn_addproyecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(39, 39, 39)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(newCols, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(btn_crear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchUserCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchUserCaretUpdate
 
+        options.hidePopup();
+        options.removeAllItems();
+
+        //options.addItem("mensaje secreto 100% real no fake");
+
+        if (!searchUser.getText().isEmpty())
+        {
+            for (String search : wbs.getRelativeUsers(searchUser.getText()))
+            {
+                options.addItem(search);
+            }
+            if (options.getItemAt(0)!=null)
+            {
+                options.showPopup();
+            }
+        }
+        else
+        {
+            options.hidePopup();
+        }
+        options.setSelectedIndex(-1);
+        searchUser.requestFocus();
+
+    }//GEN-LAST:event_searchUserCaretUpdate
+
+    private void searchUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUserKeyPressed
+
+        if (evt.getKeyCode()==10)
+        {
+            newCols.addItem(searchUser.getText());
+            newCols.showPopup();
+        }
+
+    }//GEN-LAST:event_searchUserKeyPressed
+
+    private void optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsActionPerformed
+        try
+        {
+            String n=(options.getItemAt(options.getSelectedIndex()));
+            System.out.println(n);
+            searchUser.setText(n);
+        }
+        catch (Exception e)
+        {
+            System.out.println("sin seleccion");
+        }
+
+    }//GEN-LAST:event_optionsActionPerformed
+
+    private void btn_addproyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addproyectoMouseClicked
+        newCols.addItem(searchUser.getText());
+        newCols.showPopup();
+    }//GEN-LAST:event_btn_addproyectoMouseClicked
+
+    private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
+
+        ArrayList<String> addstuff = new ArrayList<>();
+        for (int i = 0; i < newCols.getItemCount(); i++)
+        {
+            addstuff.add(newCols.getItemAt(i));
+        }
+
+        ((Project)Wbs.tree.getInfo()).addcols(addstuff);
+
+        try {
+            String pron= ((Project)(Wbs.tree.getInfo())).getName();
+            String linea;
+            BufferedReader leer = new BufferedReader(new FileReader("usuarios.txt"));
+
+
+            while((linea=leer.readLine())!=null)
+            {
+                ArrayList<String> campos =wbs.separar(linea);
+                for (String string : addstuff)
+                {
+                    if ((campos.get(0)).equals(string))
+                    {
+                        wbs.ms.sendMail(new MailModel(MailType.NEW_PROJECT_COLABORATOR,campos.get(2),campos.get(0),pron));
+                    }
+                }
+            }
+
+            
+            JOptionPane.showMessageDialog(this, " Paquete nuevo creado\n se ha notificado a los nuevos colaboradores", "Notificaciones enviadas", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException ioe)
+        {
+            System.out.println("error en la lectura de archivo");
+            ioe.printStackTrace();
+        }catch (Exception e)
+        {
+            System.out.println("error en el envio del correo");
+            e.printStackTrace();
+        }
+
+        poblar_cols();
+        
+    }//GEN-LAST:event_btn_crearActionPerformed
+
+
+    Wbs wbs = new Wbs();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btn_addproyecto;
+    private rojeru_san.RSButton btn_crear;
+    private javax.swing.JList<String> colList;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JComboBox<String> newCols;
+    private javax.swing.JComboBox<String> options;
+    private javax.swing.JTextField searchUser;
     // End of variables declaration//GEN-END:variables
 }

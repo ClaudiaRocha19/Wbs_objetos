@@ -5,6 +5,16 @@
  */
 package paneles;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import mail.MailModel;
+import mail.MailType;
+import modelos.Project;
+import wbs.Wbs;
+
 /**
  *
  * @author Leonidas
@@ -27,35 +37,312 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel8 = new javax.swing.JLabel();
+        newPackName = new javax.swing.JTextField();
+        btn_crear = new rojeru_san.RSButton();
+        jLabel9 = new javax.swing.JLabel();
+        btn_addproyecto = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        searchUser = new javax.swing.JTextField();
+        options = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        pred = new javax.swing.JRadioButton();
+        pers = new javax.swing.JRadioButton();
+        asunto = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        mensaje = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        newCols = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(218, 175, 118));
         setMinimumSize(new java.awt.Dimension(689, 521));
+        setPreferredSize(new java.awt.Dimension(689, 521));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(47, 19, 6));
-        jLabel8.setText("Paquete");
+        jLabel8.setText("Agregar colaborador:");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(270, 270, 270)
-                .addComponent(jLabel8)
-                .addContainerGap(354, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
-        );
+        newPackName.setToolTipText("Nombre del paquete");
+        add(newPackName, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 310, 40));
+
+        btn_crear.setBackground(new java.awt.Color(172, 95, 47));
+        btn_crear.setText("Crear paquete");
+        btn_crear.setToolTipText("crear");
+        btn_crear.setColorHover(new java.awt.Color(208, 124, 66));
+        btn_crear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearActionPerformed(evt);
+            }
+        });
+        add(btn_crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 250, -1));
+
+        jLabel9.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel9.setText("Nuevo paquete:");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 23, -1, 40));
+
+        btn_addproyecto.setBackground(new java.awt.Color(172, 95, 47));
+        btn_addproyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_addproyectoMouseClicked(evt);
+            }
+        });
+        btn_addproyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Plus_24px.png"))); // NOI18N
+        btn_addproyecto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 50, 40));
+
+        searchUser.setToolTipText("Buscar colaborador");
+        searchUser.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                searchUserCaretUpdate(evt);
+            }
+        });
+        searchUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchUserKeyPressed(evt);
+            }
+        });
+        btn_addproyecto.add(searchUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 40));
+
+        options.setFocusable(false);
+        options.setOpaque(false);
+        options.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionsActionPerformed(evt);
+            }
+        });
+        btn_addproyecto.add(options, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 260, 20));
+
+        add(btn_addproyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 310, 40));
+
+        jLabel10.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel10.setText("Notificación de ingreso:");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(437, 23, -1, 40));
+
+        buttonGroup1.add(pred);
+        pred.setSelected(true);
+        pred.setText("Predeterminado");
+        pred.setOpaque(false);
+        pred.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                predMouseClicked(evt);
+            }
+        });
+        add(pred, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, -1, -1));
+
+        buttonGroup1.add(pers);
+        pers.setText("Personalizar");
+        pers.setOpaque(false);
+        pers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                persMouseClicked(evt);
+            }
+        });
+        add(pers, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, -1, -1));
+
+        asunto.setEditable(false);
+        add(asunto, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, 208, 34));
+
+        jLabel11.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel11.setText("Mensaje:");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, -1, 40));
+
+        jLabel13.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel13.setText("Asunto:");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, -1, 40));
+
+        mensaje.setEditable(false);
+        mensaje.setColumns(20);
+        mensaje.setRows(5);
+        jScrollPane1.setViewportView(mensaje);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 210, 120));
+
+        jSeparator1.setBackground(new java.awt.Color(172, 95, 47));
+        jSeparator1.setForeground(new java.awt.Color(172, 95, 47));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 10, 360));
+
+        add(newCols, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 310, 34));
+
+        jLabel12.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(47, 19, 6));
+        jLabel12.setText("Colaboradores:");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, 40));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
+        
+        ((Project)Wbs.tree.getInfo()).addPack(newPackName.getText());
+        
+        ArrayList<String> addstuff = new ArrayList<>();
+        for (int i = 0; i < newCols.getItemCount(); i++) 
+        {
+            addstuff.add(newCols.getItemAt(i));
+        }
+        
+        ((Project)Wbs.tree.getInfo()).addcols(addstuff);
+        
+        try {
+            String pron= ((Project)(Wbs.tree.getInfo())).getName();
+            String linea;
+            BufferedReader leer = new BufferedReader(new FileReader("usuarios.txt"));
+            
+            if (pred.isSelected()) {
+                while((linea=leer.readLine())!=null)
+                {
+                    ArrayList<String> campos =wbs.separar(linea);
+                    for (String string : addstuff) 
+                    {
+                        if ((campos.get(0)).equals(string)) 
+                        {
+                            wbs.ms.sendMail(new MailModel(MailType.NEW_PROJECT_COLABORATOR,campos.get(2),campos.get(0),pron));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                while((linea=leer.readLine())!=null)
+                {
+                    ArrayList<String> campos =wbs.separar(linea);
+                    for (String string : addstuff) 
+                    {
+                        if ((campos.get(0)).equals(string)) 
+                        {
+                            wbs.ms.sendMail(new MailModel(campos.get(0)+", "+asunto.getText(),mensaje.getText(),campos.get(2)));
+                        }
+                    }
+                }
+            }
+            leer.close();
+            
+            JOptionPane.showMessageDialog(this, " Paquete nuevo creado\n se ha notificado a los nuevos colaboradores", "Notificaciones enviadas", JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (IOException ioe) 
+        {
+            System.out.println("error en la lectura de archivo");
+            ioe.printStackTrace();
+        }catch (Exception e)
+        {
+            System.out.println("error en el envio del correo");
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_btn_crearActionPerformed
+
+    private void btn_addproyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addproyectoMouseClicked
+        newCols.addItem(searchUser.getText());
+        newCols.showPopup();
+    }//GEN-LAST:event_btn_addproyectoMouseClicked
+
+    private void searchUserCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_searchUserCaretUpdate
+        
+        options.hidePopup();
+        options.removeAllItems();
+        
+        //options.addItem("mensaje secreto 100% real no fake");
+        
+        if (!searchUser.getText().isEmpty()) 
+        {
+            for (String search : wbs.getRelativeUsers(searchUser.getText())) 
+            {
+                options.addItem(search);
+            }
+            if (options.getItemAt(0)!=null) 
+            {
+                options.showPopup();   
+            }
+        }
+        else
+        {
+            options.hidePopup();
+        }
+        options.setSelectedIndex(-1);
+        searchUser.requestFocus();
+        
+    }//GEN-LAST:event_searchUserCaretUpdate
+
+    private void searchUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchUserKeyPressed
+        
+        if (evt.getKeyCode()==10) 
+        {
+            newCols.addItem(searchUser.getText());
+            newCols.showPopup();
+        }
+        
+    }//GEN-LAST:event_searchUserKeyPressed
+
+    private void optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionsActionPerformed
+        try 
+        {
+            String n=(options.getItemAt(options.getSelectedIndex()));
+            System.out.println(n);
+            searchUser.setText(n);    
+        }
+        catch (Exception e) 
+        {
+            System.out.println("sin seleccion");
+        }
+        
+    }//GEN-LAST:event_optionsActionPerformed
+
+    private void persMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_persMouseClicked
+        
+        if (pers.isSelected()) 
+        {
+           asunto.setEditable(true);
+           mensaje.setEditable(true);
+        }
+        
+    }//GEN-LAST:event_persMouseClicked
+
+    private void predMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_predMouseClicked
+        
+        if (pred.isSelected()) 
+        {
+           asunto.setEditable(false);
+           mensaje.setEditable(false);
+        }
+        
+    }//GEN-LAST:event_predMouseClicked
+
+    
+    private int labelReference;
+    Wbs wbs = new Wbs();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField asunto;
+    private javax.swing.JPanel btn_addproyecto;
+    private rojeru_san.RSButton btn_crear;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextArea mensaje;
+    private javax.swing.JComboBox<String> newCols;
+    private javax.swing.JTextField newPackName;
+    private javax.swing.JComboBox<String> options;
+    private javax.swing.JRadioButton pers;
+    private javax.swing.JRadioButton pred;
+    private javax.swing.JTextField searchUser;
     // End of variables declaration//GEN-END:variables
 }
