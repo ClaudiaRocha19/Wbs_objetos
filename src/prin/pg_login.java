@@ -385,11 +385,11 @@ public class pg_login extends javax.swing.JFrame {
                             this.dispose();
                         }else if(dig == '1'){
                             mensajeerror = true;
-                            
                             pg_userprin admp = new pg_userprin();
                             admp.setVisible(true);
                             admp.setNombre(name);
                             Wbs.admin = new Admin(name);
+                            Wbs.user = new User(name);
                             this.dispose();
                         }
                         
