@@ -29,7 +29,7 @@ public class Wbs {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        tree.setInfo(new Project("",tree));
         pgl = new pg_login();
         pgl.setVisible(true);
         
@@ -171,6 +171,7 @@ public class Wbs {
         pg_adminprin pgp = new pg_adminprin();
         pgp.setNombre(project.getName());
         pgp.setVisible(true);
+        
     }
     
     public void saveProject()

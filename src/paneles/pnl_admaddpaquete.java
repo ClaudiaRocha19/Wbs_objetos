@@ -5,6 +5,7 @@
  */
 package paneles;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
      */
     public pnl_admaddpaquete() {
         initComponents();
+        mensaje.setBackground(new Color(236,236,236));
     }
 
     /**
@@ -305,6 +307,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         {
            asunto.setEditable(true);
            mensaje.setEditable(true);
+           mensaje.setBackground(Color.white);
         }
         
     }//GEN-LAST:event_persMouseClicked
@@ -315,6 +318,7 @@ public class pnl_admaddpaquete extends javax.swing.JPanel {
         {
            asunto.setEditable(false);
            mensaje.setEditable(false);
+           mensaje.setBackground(new Color(236,236,236));
         }
         
     }//GEN-LAST:event_predMouseClicked

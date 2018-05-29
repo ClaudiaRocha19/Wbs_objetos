@@ -5,9 +5,18 @@
  */
 package paneles;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import modelos.Pack;
 import modelos.Project;
 import modelos.User;
+import prin.pg_userprin;
 import wbs.Wbs;
 
 /**
@@ -16,22 +25,55 @@ import wbs.Wbs;
  */
 public class pnl_adminicio extends javax.swing.JPanel {
 
+    ArrayList<Pack> packs = new ArrayList<>();
+
     /**
      * Creates new form pnl_adminicio
      */
     public pnl_adminicio() {
         initComponents();
-        poblar_cols();
+        cargar_paquetes();
     }
 
-    private void poblar_cols()
-    {
-        
+    private void poblar_cols() {
+
         // poblar con fotos, ahuevo
-        
     }
-    
-    
+
+    private void cargar_paquetes() {
+        pg_userprin p = new pg_userprin();
+        int antx = 5;
+        ImageIcon icon = new ImageIcon("src/img/folder.png");
+        packs = ((Project) (Wbs.tree.getInfo())).getPacks();
+        
+        if (packs == null || packs.size() == 0) {
+            JLabel label = new JLabel();
+            label.setBounds(10, 0, 250, 150);
+            label.setFont(new java.awt.Font("Arial", 0, 14));
+            label.setText("No hay paquetes en este proyecto");
+            pnl_packs.add(label);
+
+        } else {
+            for (Pack pack : packs) {
+                JPanel panel = new JPanel();
+                JLabel label = new JLabel();
+                JLabel labelicon = new JLabel();
+                labelicon.setBounds(0, 0, 150, 150);
+                label.setBounds(0, 0, 150, 150);
+                labelicon.setIcon(icon);
+                label.setText(pack.getName());
+                panel.setBounds(0, 0, 300, 150);
+                panel.setBackground(Color.white);              
+                antx += 310;
+                panel.add(labelicon);
+                panel.add(label);
+                pnl_packs.add(panel);
+
+            }
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +85,7 @@ public class pnl_adminicio extends javax.swing.JPanel {
 
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        pnl_packs = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         colList = new javax.swing.JPanel();
 
@@ -54,20 +96,20 @@ public class pnl_adminicio extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(47, 19, 6));
         jLabel8.setText("Colaboradores de proyecto");
 
-        jPanel1.setBackground(new java.awt.Color(218, 175, 118));
+        pnl_packs.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_packsLayout = new javax.swing.GroupLayout(pnl_packs);
+        pnl_packs.setLayout(pnl_packsLayout);
+        pnl_packsLayout.setHorizontalGroup(
+            pnl_packsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 659, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_packsLayout.setVerticalGroup(
+            pnl_packsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 146, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(jPanel1);
+        jScrollPane1.setViewportView(pnl_packs);
 
         jLabel9.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(47, 19, 6));
@@ -128,7 +170,7 @@ public class pnl_adminicio extends javax.swing.JPanel {
     private javax.swing.JPanel colList;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnl_packs;
     // End of variables declaration//GEN-END:variables
 }

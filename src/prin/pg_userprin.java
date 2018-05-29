@@ -7,14 +7,23 @@ package prin;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import modelos.Pack;
 import modelos.Project;
 import wbs.Wbs;
 
@@ -23,38 +32,42 @@ import wbs.Wbs;
  * @author Leonidas
  */
 public class pg_userprin extends javax.swing.JFrame {
-    File archivo;
+    ArrayList<Pack> paquetes = new ArrayList<>();
+    File archivo,foto;
+
     /**
      * Creates new form pg_userprin
      */
     public pg_userprin() {
         initComponents();
+        
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setLocationRelativeTo(null);
-        
-        Wbs.savedParameters=this;
-        
+
+        Wbs.savedParameters = this;
+
     }
 
     public void setNombre(String nombre) {
         this.lbl_nombre.setText(nombre);
-        try 
-        {
-            rsscalelabel.RSScaleLabel.setScaleLabel(lbl_foto,"allusers/"+nombre+"/foto.png");
-        } catch (Exception e) 
-        {
-            rsscalelabel.RSScaleLabel.setScaleLabel(lbl_foto,"src/img/defaultuser.png");
-        }
         
+        try {
+            rsscalelabel.RSScaleLabel.setScaleLabel(this.lbl_foto, "allusers/" + nombre + "/foto.png");
+            foto = new File("allusers/" + nombre + "/foto.png");
+        } catch (Exception e) {
+            rsscalelabel.RSScaleLabel.setScaleLabel(this.lbl_foto, "src/img/defaultuser.png");
+            foto = new File("src/img/defaultuser.png");
+        }
+
 //        ImageIcon image= new ImageIcon(getClass().getResource("foto.png"));
 //        ImageIcon newImage = new ImageIcon(image.getImage().getScaledInstance(lbl_foto.getWidth(), lbl_foto.getHeight(), Image.SCALE_DEFAULT));
 //        lbl_foto.setIcon(newImage);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,10 +104,18 @@ public class pg_userprin extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
+        frm_editarperfil.setMinimumSize(new java.awt.Dimension(387, 340));
+
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setMinimumSize(new java.awt.Dimension(387, 340));
+        jPanel4.setPreferredSize(new java.awt.Dimension(387, 340));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Establecer foto de perfil");
+
+        lbl_usufoto.setMinimumSize(new java.awt.Dimension(126, 137));
+        lbl_usufoto.setName(""); // NOI18N
+        lbl_usufoto.setPreferredSize(new java.awt.Dimension(126, 137));
 
         btn_examinar.setBackground(new java.awt.Color(204, 51, 0));
         btn_examinar.setText("Examinar...");
@@ -122,6 +143,11 @@ public class pg_userprin extends javax.swing.JFrame {
         btn_aceptar.setText("Aceptar");
         btn_aceptar.setColorHover(new java.awt.Color(255, 153, 0));
         btn_aceptar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_aceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -130,6 +156,11 @@ public class pg_userprin extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(lbl_usufoto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
@@ -138,15 +169,7 @@ public class pg_userprin extends javax.swing.JFrame {
                             .addComponent(btn_examinar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -160,23 +183,23 @@ public class pg_userprin extends javax.swing.JFrame {
                         .addComponent(btn_examinar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(lbl_usufoto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25)
+                        .addComponent(lbl_usufoto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout frm_editarperfilLayout = new javax.swing.GroupLayout(frm_editarperfil.getContentPane());
         frm_editarperfil.getContentPane().setLayout(frm_editarperfilLayout);
         frm_editarperfilLayout.setHorizontalGroup(
             frm_editarperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         frm_editarperfilLayout.setVerticalGroup(
             frm_editarperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,31 +338,50 @@ public class pg_userprin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public ArrayList<Pack> getPaquetes() {
+        return paquetes;
+    }
+
     private void btn_addproyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addproyectoMouseClicked
         //String name = JOptionPane.showInputDialog(null,"Nombre del projecto");
-        wbs.createProject(new Project(JOptionPane.showInputDialog(null,"Nombre del projecto"),Wbs.tree));
+        String nomproy = JOptionPane.showInputDialog(null, "Nombre del proyecto");
+
+        while (nomproy.isEmpty() && nomproy != null) {
+            JOptionPane.showMessageDialog(this, "El campo esta vacio", "Error", JOptionPane.ERROR_MESSAGE);
+            nomproy = JOptionPane.showInputDialog(null, "Nombre del proyecto");
+        }
+        if (!(nomproy == null) && !(nomproy.isEmpty())) {
+            Project p = new Project (nomproy,Wbs.tree);
+            
+            wbs.createProject(p);
+            
+           //wbs.createProject(new Project(nomproy, Wbs.tree));
+           
+
+        }
         this.setVisible(false);
+
+
     }//GEN-LAST:event_btn_addproyectoMouseClicked
 
     private void btn_examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_examinarActionPerformed
-        JFileChooser fc= new JFileChooser();
+        JFileChooser fc = new JFileChooser();
         BufferedImage imagen = null;
 
-        fc.setDialogTitle("Buscar portada de película");
-        if (fc.showOpenDialog(this)== JFileChooser.APPROVE_OPTION) {
+        fc.setDialogTitle("Buscar foto");
+        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             archivo = fc.getSelectedFile();
 
-            if(archivo.canRead()){
+            if (archivo.canRead()) {
                 if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
-                    //img = impelicula.portada(archivo);
-                    rsscalelabel.RSScaleLabel.setScaleLabel(lbl_usufoto,archivo.toString());
-                    String ruta  = fc.getSelectedFile().toString();
+                    rsscalelabel.RSScaleLabel.setScaleLabel(lbl_usufoto, archivo.toString());
+                    String ruta = fc.getSelectedFile().toString();
                     String ext = null;
 
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(this, "Escoja una imagen con extension jpg, png o gif");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Hubo un problema con el archivo");
             }
         }
@@ -355,7 +397,91 @@ public class pg_userprin extends javax.swing.JFrame {
 
     private void btn_editperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editperfilMouseClicked
         frm_editarperfil.setVisible(true);
+        String nombre = lbl_nombre.getText();
+        try {
+            rsscalelabel.RSScaleLabel.setScaleLabel(lbl_usufoto, "allusers/" + nombre + "/foto.png");
+
+        } catch (Exception e) {
+            rsscalelabel.RSScaleLabel.setScaleLabel(lbl_usufoto, "src/img/defaultuser.png");
+
+        }
     }//GEN-LAST:event_btn_editperfilMouseClicked
+
+    private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
+        if (!txt_pass.equals("")) {
+            File arch = new File("temp.txt");
+            File usuarios = new File("usuarios.txt");
+            BufferedReader br = null;
+
+            String line, word = lbl_nombre.getText();
+
+            try {
+                br = new BufferedReader(new FileReader("usuarios.txt"));
+                BufferedWriter bw = new BufferedWriter(new FileWriter(arch));
+                String[] palabras = new String[100];
+                line = br.readLine();
+                while ((line = br.readLine()) != null) {
+                    palabras = substr(line, 3);
+                    if (palabras[0].equals(word)) {
+
+                        bw.write(palabras[0] + "," + txt_pass.getText() + "," + palabras[2] + "," + "1,");
+                        bw.newLine();
+                    } else {
+                        bw.write(line);
+                        bw.newLine();
+                    }
+
+                }
+                bw.close();
+                br.close();
+               
+                if (usuarios.exists()) {
+                    String nm = usuarios.getName();
+                    arch.renameTo(usuarios);
+                    usuarios.delete();
+
+                }
+
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, porfavor intentelo nuevamente");
+            } catch (IOException ex) {
+                Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btn_aceptarActionPerformed
+    private String[] substr(String line, int comas) {
+        int ant = 0, p = 0, contguion = 0;
+        String[] palabras = new String[100];
+        for (int j = 0; j < line.length() - 1; j++) {
+            if (line.charAt(j) == ',') {
+                if (comas == 0) {
+                    palabras[0] = line.substring(0, j);
+                    ant = j + 1;
+                    contguion++;
+
+                    p++;
+
+                } else {
+                    if (contguion < comas) {
+                        palabras[p] = line.substring(ant, j);
+                        ant = j + 1;
+
+                        p++;
+                        contguion++;
+
+                    }
+
+                }
+            }
+            if (contguion == comas) {
+                palabras[p] = line.substring(ant, line.length() - 1);
+
+                p++;
+                contguion++;
+            }
+        }
+        return palabras;
+    }
 
     /**
      * @param args the command line arguments
@@ -396,14 +522,13 @@ public class pg_userprin extends javax.swing.JFrame {
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         new pg_login().setVisible(true);
         super.dispose();
     }
-    
+
     Wbs wbs = new Wbs();
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojeru_san.RSButton btn_aceptar;
     private javax.swing.JPanel btn_addproyecto;
