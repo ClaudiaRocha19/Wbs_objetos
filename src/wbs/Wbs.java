@@ -36,7 +36,7 @@ public class Wbs {
 
     }
     
-    public static boolean open_vtn=false;
+    //public static boolean open_vtn=false;
     public static pg_login pgl;
     public static JFrame savedParameters;
     public static  Nodo tree = new Nodo();
@@ -47,6 +47,13 @@ public class Wbs {
     
 //USABLE METHODS________________________________________________________________    
     
+    /**
+     * verifica si el parámetro ya se encuentra en el primer campo de una linea de un archivo
+     * @param compare _ parámetro de comparación
+     * @param fileName _ nombre del archivo
+     * @return
+     * @throws IOException 
+     */
     public boolean isInFile(String compare, String fileName)
             throws IOException
     {
@@ -70,11 +77,22 @@ public class Wbs {
         return false;
     }
     
+    /**
+     * separa los campos de un registro en un ArrrayList
+     * @param linea
+     * @return 
+     */
     public ArrayList<String> separar(String linea)
     {
         return separeRecursive(linea,new ArrayList<String>());
     }
     
+    /**
+     * función recursiva para separado de campos
+     * @param linea
+     * @param campos
+     * @return 
+     */
     private ArrayList<String> separeRecursive(String linea, ArrayList<String> campos)
     {
         int sep = linea.indexOf(",");
@@ -92,6 +110,12 @@ public class Wbs {
         
     }
     
+    /**
+     * Agrega una linea a un archivo
+     * @param line
+     * @param fileName
+     * @throws IOException 
+     */
     public void addToFile(String line,String fileName) 
             throws IOException
     {
@@ -102,6 +126,11 @@ public class Wbs {
         e.close();
     }
     
+    /**
+     * regresa la lista de usuarios con nombres que empiezen con el parámetro base
+     * @param base
+     * @return 
+     */
     public ArrayList<String> getRelativeUsers(String base)
     {
         try 
@@ -134,8 +163,12 @@ public class Wbs {
         return null;
     }
     
-    
-    
+    /**
+     * envía el mail de bienvenida al registrar un usuario
+     * @param destiny
+     * @param name
+     * @return 
+     */
     public boolean welcomeMail(String destiny, String name)
     {
         try
