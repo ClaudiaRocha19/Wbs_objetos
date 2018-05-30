@@ -26,8 +26,15 @@ public class SubNodo extends Nodo{
     public SubNodo(Object info) 
     {    
         super(info);
-        this.level = sup.getLevel()+1;
         
+        try{
+            this.level = sup.getLevel()+1;
+        }
+        catch(NullPointerException npe)
+        {
+            System.out.println("se creó una hoja");
+            this.level = 3;
+        }
     }
 
     public SubNodo() {
@@ -100,6 +107,10 @@ public class SubNodo extends Nodo{
 
     public int getLevel() {
         return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
     
     

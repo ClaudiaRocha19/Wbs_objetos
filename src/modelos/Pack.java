@@ -40,9 +40,12 @@ public class Pack {
     public void addTask(Task task)
     {
         SubNodo nuevo = new SubNodo(task);
+        task.nativo = nuevo;
+        nuevo.setInfo(task);
+        task.setPack(this);
         subnativo.add(nuevo);
         tasks.add(task);
-        task.nativo = nuevo;
+        
     }
     
     public ArrayList<Task> getTasks() {

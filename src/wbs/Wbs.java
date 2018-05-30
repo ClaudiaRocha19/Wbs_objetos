@@ -209,9 +209,73 @@ public class Wbs {
     
     public void saveProject()
     {
-        
+        try 
+        {
+            //guardar el arbol de proyecto
+            tree.save(new FileWriter(
+                    "allusers/"
+                    +user.getName()
+                    +"/"+((Project)tree.getInfo()).getName()+".txt"));
+            
+            //guardar los colaboradores
+            BufferedWriter escColaboradores = new BufferedWriter(
+                    (new FileWriter(
+                    "allusers/"
+                    +user.getName()
+                    +"/"+((Project)tree.getInfo()).getName()+"colaborators.txt")));
+            
+            for (User col : ((Project)tree.getInfo()).getCols()) 
+            {
+                escColaboradores.write(col.getName());
+                escColaboradores.newLine();
+            }
+            
+            escColaboradores.close();
+            
+            BufferedWriter agregarproyecto = new BufferedWriter(
+                    new FileWriter("allusers/"
+                    +user.getName()
+                    +"/projectindex.txt",true));
+            
+            agregarproyecto.write(((Project)tree.getInfo()).getName());
+            agregarproyecto.newLine();
+            agregarproyecto.close();
+        }
+        catch (IOException ioe) 
+        {
+            System.out.println("Error en la escritura de archivo:");
+            ioe.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Errores no relacionados");
+            e.printStackTrace();
+        }
         
     }
     
+    public Pack searchPack(String packName)
+    {
+        for (Pack pack : ((Project)Wbs.tree.getInfo()).getPacks()) 
+        {
+            if (pack.getName().equals(packName)) 
+            {
+                return pack;
+            }
+        }
+        return null;
+    }
+    
+    public User searchCol(String colName)
+    {
+        for (User col : ((Project)Wbs.tree.getInfo()).getCols()) 
+        {
+            if (col.getName().equals(colName)) 
+            {
+                return col;
+            }
+        }
+        return null;
+    }
     
 }

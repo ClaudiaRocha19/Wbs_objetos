@@ -26,6 +26,16 @@ public class Task {
     private Prioridad prioridad;
     
     SubNodo nativo;
+
+    
+    public Task(User attendant, Date startDate, Date endDate, String taskName,Prioridad prioridad) 
+    {
+        this.attendant = attendant;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.taskName = taskName;
+        this.prioridad = prioridad;
+    }
     
     public Task(User attendant, Date startDate, Date endDate, String taskName, Pack pack) 
     {
@@ -51,6 +61,23 @@ public class Task {
     
 //______________________________________________________________________________    
 
+    @Override
+    public String toString()
+    {
+        //User attendant, Date startDate, Date endDate, String taskName,Prioridad prioridad
+        return 
+                this.attendant.getName()+","+
+                String.valueOf(this.startDate.getYear())+"/"+
+                String.valueOf(this.startDate.getMonth())+"/"+
+                String.valueOf(this.startDate.getDay())+","+
+                String.valueOf(this.endDate.getYear())+"/"+
+                String.valueOf(this.endDate.getMonth())+"/"+
+                String.valueOf(this.endDate.getDay())+","+
+                this.taskName+","+
+                this.prioridad;
+    }
+    
+    
     public User getAttendant() {
         return attendant;
     }

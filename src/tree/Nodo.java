@@ -5,6 +5,7 @@
  */
 package tree;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -154,7 +155,64 @@ public class Nodo{
         return level;
     }
 
+//WBS METHODS___________________________________________________________________
+
+    java.io.BufferedWriter saver;
     
+    public void save(java.io.FileWriter archivo) 
+            throws IOException
+    {
+        saver = new java.io.BufferedWriter(archivo);
+        System.out.println("\nESTRUCTURA RAMIFICADA DEL ARBOL\n");
+        recursiveSave(this,0);
+        saver.close();
+    }
+    
+    private void recursiveSave(Nodo sb, int tabs)
+            throws IOException
+    {
+        for (int i = 0; i < tabs; i++) 
+        {
+            System.out.print("    ");
+            saver.write("-");
+        }
+        saver.write(sb.toStringWbs());
+        saver.newLine();
+        System.out.println(sb.getLevel()+" "+sb);
+        
+        if (sb.subs!=null) 
+        {    
+            for (SubNodo sub : sb.subs) 
+            {
+                recursiveSave(sub,tabs+1);
+            }    
+        }
+        
+        System.out.println(sb.level==2? "---> final de la rama\n": ""); 
+        
+    }
+    
+    protected String toStringWbs()
+    {
+        if (this.getInfo() instanceof modelos.Project) 
+        {
+            return ((modelos.Project)this.getInfo()).getName();
+        }
+        else if(this.getInfo() instanceof modelos.Pack)
+        {
+            return ((modelos.Pack)this.getInfo()).getName();
+        }
+        else if(this.getInfo() instanceof modelos.Task)
+        {
+            modelos.Task task = ((modelos.Task)this.getInfo());
+            return task.toString();
+        }
+        else
+        {
+            System.out.println("objeto no reconocido");
+            return "objeto desconocido";
+        }
+    }
     
     
 }

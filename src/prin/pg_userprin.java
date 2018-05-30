@@ -86,6 +86,11 @@ public class pg_userprin extends javax.swing.JFrame {
         txt_pass = new javax.swing.JPasswordField();
         btn_cancelar = new rojeru_san.RSButton();
         btn_aceptar = new rojeru_san.RSButton();
+        frameColaboradores = new javax.swing.JFrame();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btn_cancelar1 = new rojeru_san.RSButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -192,7 +197,7 @@ public class pg_userprin extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout frm_editarperfilLayout = new javax.swing.GroupLayout(frm_editarperfil.getContentPane());
@@ -203,7 +208,65 @@ public class pg_userprin extends javax.swing.JFrame {
         );
         frm_editarperfilLayout.setVerticalGroup(
             frm_editarperfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+        );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        btn_cancelar1.setBackground(new java.awt.Color(204, 51, 0));
+        btn_cancelar1.setText("Cancelar");
+        btn_cancelar1.setColorHover(new java.awt.Color(255, 153, 0));
+        btn_cancelar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_cancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(btn_cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btn_cancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+
+        javax.swing.GroupLayout frameColaboradoresLayout = new javax.swing.GroupLayout(frameColaboradores.getContentPane());
+        frameColaboradores.getContentPane().setLayout(frameColaboradoresLayout);
+        frameColaboradoresLayout.setHorizontalGroup(
+            frameColaboradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        frameColaboradoresLayout.setVerticalGroup(
+            frameColaboradoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -241,6 +304,11 @@ public class pg_userprin extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 92, -1, -1));
 
         btn_vercolaboradores.setBackground(new java.awt.Color(172, 95, 47));
+        btn_vercolaboradores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_vercolaboradoresMouseClicked(evt);
+            }
+        });
         btn_vercolaboradores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -388,7 +456,7 @@ public class pg_userprin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_examinarActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-        this.dispose();
+        frm_editarperfil.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
@@ -396,6 +464,7 @@ public class pg_userprin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void btn_editperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editperfilMouseClicked
+        
         frm_editarperfil.setVisible(true);
         String nombre = lbl_nombre.getText();
         try {
@@ -449,6 +518,15 @@ public class pg_userprin extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_aceptarActionPerformed
+
+    private void btn_cancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelar1ActionPerformed
+        frameColaboradores.dispose();
+    }//GEN-LAST:event_btn_cancelar1ActionPerformed
+
+    private void btn_vercolaboradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_vercolaboradoresMouseClicked
+        //frameColaboradores.setLocationRelativeTo(null);
+        frameColaboradores.setVisible(true);
+    }//GEN-LAST:event_btn_vercolaboradoresMouseClicked
     private String[] substr(String line, int comas) {
         int ant = 0, p = 0, contguion = 0;
         String[] palabras = new String[100];
@@ -533,9 +611,11 @@ public class pg_userprin extends javax.swing.JFrame {
     private rojeru_san.RSButton btn_aceptar;
     private javax.swing.JPanel btn_addproyecto;
     private rojeru_san.RSButton btn_cancelar;
+    private rojeru_san.RSButton btn_cancelar1;
     private javax.swing.JPanel btn_editperfil;
     private rojeru_san.RSButton btn_examinar;
     private javax.swing.JPanel btn_vercolaboradores;
+    private javax.swing.JFrame frameColaboradores;
     private javax.swing.JFrame frm_editarperfil;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -550,7 +630,10 @@ public class pg_userprin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_foto;
     private javax.swing.JLabel lbl_nombre;
     private javax.swing.JLabel lbl_usufoto;
