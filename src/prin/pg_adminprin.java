@@ -8,6 +8,7 @@ package prin;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import modelos.Project;
@@ -260,7 +261,10 @@ public class pg_adminprin extends javax.swing.JFrame {
     @Override
     public void dispose()
     {
+        JOptionPane.showMessageDialog(this, "El proyecto se guardará antes de regresar a la ventana de usuario", "Proyecto guardado", JOptionPane.INFORMATION_MESSAGE);
+        wbs.saveProject();
         Wbs.savedParameters.setVisible(true);
+        ((pg_userprin)Wbs.savedParameters).setNombre(Wbs.user.getName());
         super.dispose();
     }
     
@@ -300,6 +304,7 @@ public class pg_adminprin extends javax.swing.JFrame {
         });
     }
 
+    Wbs wbs = new Wbs();
     Project p;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_addcolaboradores;
