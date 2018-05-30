@@ -29,7 +29,10 @@ public class Project {
     public Project(String name) {
         this.name = name;
     }
-    
+    /**
+     * Agrega un paquete al arbol de trabajo(proyecto).
+     * @param name:nombre
+     */
     public void addPack(String name)
     {
         SubNodo sn = new SubNodo();
@@ -40,12 +43,18 @@ public class Project {
         
         packs.add(nuevo);
     }
-
+    /**
+     * Agrega un colaborador a los existentes.
+     * @param us:usuario
+     */
     public void addcol(User us)
     {
         cols.add(us);
     }
-    
+    /**
+     * Agrega varios colaboradores al mismo arreglo.
+     * @param users 
+     */
     public void addcols(ArrayList<String> users)
     {
         for (String user : users) 

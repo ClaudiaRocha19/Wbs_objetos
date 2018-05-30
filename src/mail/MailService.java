@@ -26,6 +26,12 @@ public class MailService implements Runnable{
     private MailModel actualMail;
     private ArrayList<String> mass =new ArrayList<>(); 
     
+    /**Revisa si se puede enviar un correo o no.
+     * 
+     * @param mail:correo
+     * @return true si puede ser enviado y false en caso que el correo esté incompleto o si se da error interno en la aplicacion.
+     */   
+    
     public boolean sendMail(MailModel mail)
     {
         try
@@ -48,6 +54,12 @@ public class MailService implements Runnable{
         }
     }
     
+    /**
+     * Revisa si se puede enviar un correo masivo.
+     * @param mail
+     * @param mass
+     * @return true si hace el envio, false si hay error en el parametro de entrada.
+     */
     public boolean massiveSendMail(MailModel mail, String... mass)
     {
         try
@@ -68,6 +80,10 @@ public class MailService implements Runnable{
         }
     }        
     
+    /**
+     * Metodo para envio de un correo masivo.
+     * @throws MessagingException 
+     */
     private void massiveMail() 
             throws MessagingException
     {
@@ -111,7 +127,10 @@ public class MailService implements Runnable{
         }
 
     }
-    
+    /**
+     *  Metodo para envio de un correo.
+     * @throws MessagingException 
+     */
     private void mail() 
             throws MessagingException
     {
@@ -151,7 +170,9 @@ public class MailService implements Runnable{
             //JOptionPane.showMessageDialog(null, "Su mensaje ha sido enviado");
         }
     }
-    
+    /**
+     * 
+     */
     @Override
     public void run() 
     {

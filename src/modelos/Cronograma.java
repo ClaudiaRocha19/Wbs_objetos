@@ -23,7 +23,10 @@ public class Cronograma {
     }
     
 //USABLE METHODS________________________________________________________________
-    
+    /**
+     * Agrega una tarea al arreglo.
+     * @param task:tarea
+     */
     public void addTask(Task task)
     {
         tasks.add(task);

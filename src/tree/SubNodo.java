@@ -42,7 +42,11 @@ public class SubNodo extends Nodo{
 
     
 //BASICS________________________________________________________________________
-
+    /**
+     * Revisa si un objeto tipo Nodo es igual a otro ya sea por el espacio en memoria o la información que guarda.
+     * @param anObject
+     * @return true si son totalmente iguales o iguales en informacion, en otro caso false
+     */
     @Override
     public boolean equals(Object anObject)
     {
@@ -61,7 +65,10 @@ public class SubNodo extends Nodo{
         
         return false;
     }
-    
+    /**
+     * Pasa lainformacion del subnodo a una cadena de caracter.
+     * @return string de informacion
+     */
     @Override
     public String toString()
     {
@@ -69,7 +76,9 @@ public class SubNodo extends Nodo{
     }
     
 //USABLE METHODS____________________________________________________________-___
-    
+    /**
+     * Elimina el subnodo del arreglo.
+     */
     public void del()
     {
         ArrayList<SubNodo> nueva=new ArrayList();
