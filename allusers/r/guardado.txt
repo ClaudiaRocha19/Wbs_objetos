@@ -1,7 +1,0 @@
-guardado
--paquete1
--paquete1
---rick,118/4/2,118/4/5,aaaaaaaALTA
--paquete3
---rick,118/4/2,118/4/5,aaaaaaaALTA
---rick,118/4/2,118/4/5,bbbbALTA
