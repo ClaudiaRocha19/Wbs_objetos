@@ -6,9 +6,11 @@
 package paneles;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import modelos.Pack;
 import modelos.Prioridad;
 import modelos.Project;
+import modelos.Task;
 import wbs.Wbs;
 
 
@@ -190,7 +192,9 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void combo_paqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_paqueteActionPerformed
-        // TODO add your handling code here:
+        
+        paquete = wbs.searchPack(((String)combo_paquete.getSelectedItem()));
+        //System.out.println((String)combo_paquete.getSelectedItem());
     }//GEN-LAST:event_combo_paqueteActionPerformed
 
     private void combo_prioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_prioridadActionPerformed
@@ -252,7 +256,7 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
         try
         {
             String n=(options.getItemAt(options.getSelectedIndex()));
-            System.out.println(n);
+            //System.out.println(n);
             searchUser2.setText(n);
         }
         catch (Exception e)
@@ -264,6 +268,38 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
 
     private void btn_addtareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addtareaActionPerformed
         
+        try 
+        {
+            if (wbs.searchCol(searchUser2.getText())==null) 
+            {
+                JOptionPane.showMessageDialog(this,"Este usuario no se ha añadido como colaborador");
+            }
+            else
+            {
+                paquete.addTask
+                (
+                    new Task
+                    (
+                        wbs.searchCol(searchUser2.getText()),
+                        date_fechainicio.getDatoFecha(),
+                        date_fechalimite.getDatoFecha(),
+                        txt_nomtarea.getText(),
+                        prioridad
+                    )
+                );
+                
+                // pendiente enviar notificación al encargado de la tarea
+                
+                JOptionPane.showMessageDialog(this,"Tarea creada. notificaremos al encargado");
+            }
+            //wbs.searchCol(searchUser2.getText())
+        }
+        catch (NullPointerException npe) 
+        {
+            System.out.println("no se ha ingresado el paquete");
+            npe.printStackTrace();
+            JOptionPane.showMessageDialog(this,"Por favor complete todos los campos");
+        }
         
         
     }//GEN-LAST:event_btn_addtareaActionPerformed
