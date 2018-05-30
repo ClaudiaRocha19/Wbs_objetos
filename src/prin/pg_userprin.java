@@ -9,14 +9,18 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -34,15 +38,17 @@ import static wbs.Wbs.user;
  * @author Leonidas
  */
 public class pg_userprin extends javax.swing.JFrame {
+
     ArrayList<Pack> paquetes = new ArrayList<>();
-    File archivo,foto;
+    File archivo, foto, archf;
+    String ruta = null;
 
     /**
      * Creates new form pg_userprin
      */
     public pg_userprin() {
         initComponents();
-        
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -56,7 +62,7 @@ public class pg_userprin extends javax.swing.JFrame {
 
     public void setNombre(String nombre) {
         this.lbl_nombre.setText(nombre);
-        
+
         try {
             rsscalelabel.RSScaleLabel.setScaleLabel(this.lbl_foto, "allusers/" + nombre + "/foto.png");
             foto = new File("allusers/" + nombre + "/foto.png");
@@ -423,13 +429,11 @@ public class pg_userprin extends javax.swing.JFrame {
             nomproy = JOptionPane.showInputDialog(null, "Nombre del proyecto");
         }
         if (!(nomproy == null) && !(nomproy.isEmpty())) {
-            Project p = new Project (nomproy,Wbs.tree);
-            
-            wbs.createProject(p);
-            
-           //wbs.createProject(new Project(nomproy, Wbs.tree));
-           
+            Project p = new Project(nomproy, Wbs.tree);
 
+            wbs.createProject(p);
+
+            //wbs.createProject(new Project(nomproy, Wbs.tree));
         }
         this.setVisible(false);
 
@@ -447,7 +451,8 @@ public class pg_userprin extends javax.swing.JFrame {
             if (archivo.canRead()) {
                 if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
                     rsscalelabel.RSScaleLabel.setScaleLabel(lbl_usufoto, archivo.toString());
-                    String ruta = fc.getSelectedFile().toString();
+                    ruta = fc.getSelectedFile().toString();
+                    archf = fc.getSelectedFile();
                     String ext = null;
 
                 } else {
@@ -468,7 +473,7 @@ public class pg_userprin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void btn_editperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editperfilMouseClicked
-        
+
         frm_editarperfil.setVisible(true);
         String nombre = lbl_nombre.getText();
         try {
@@ -482,111 +487,63 @@ public class pg_userprin extends javax.swing.JFrame {
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
         if (!(txt_pass.getText().equals(""))) {
-//            File arch = new File("temp.txt");
-//            File usuarios = new File("usuarios.txt");
-//            BufferedReader br = null,btemp = null;
-//
-//            String line,linea, word = lbl_nombre.getText();
-//
-//            try {
-//                br = new BufferedReader(new FileReader(usuarios));
-//                btemp = new BufferedReader(new FileReader(arch));
-//                BufferedWriter bw = new BufferedWriter(new FileWriter(arch)),usu = new BufferedWriter(new FileWriter(usuarios));;
-//                String[] palabras = new String[100];
-//                
-//                while ((line = br.readLine()) != null) {
-//                    palabras = substr(line, 3);
-//                    if (palabras[0].equals(word)) {
-//
-//                        bw.write(palabras[0] + "," + txt_pass.getText() + "," + palabras[2] + "," + "1,");
-//                        bw.newLine();
-//                    } else {
-//                        bw.write(line);
-//                        bw.newLine();
-//                    }
-//
-//                }
-//                
-//                bw.close();
-//                br.close();
-//                
-////                while((linea = btemp.readLine()) != null){
-////                    usu.write(linea);
-////                    usu.newLine();
-////                }
-//               usu.close();
-//               btemp.close();
-////                if (usuarios.exists()) {
-////                    String nm = usuarios.getName();
-////                    
-////
-////                    boolean renombrado =  arch.renameTo(usuarios);
-////                    if (renombrado) {
-////                        System.out.println("Renombrado realizado");
-////                    }else{
-////                        System.out.println("Error al renombrar");
-////                    }
-////                    boolean borrado = usuarios.delete();
-////                    if (borrado) {
-////                        System.out.println("Se borro el archivo usuarios");
-////                    }else{
-////                        System.out.println("No se pudo eliminar el archivo");
-////                    }
-////                    
-////                }
-//
-//            } catch (FileNotFoundException ex) {
-//                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, porfavor intentelo nuevamente");
-//            } catch (IOException ex) {
-//                Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
-//            }
 
-            try 
-            {
+            try {
                 BufferedReader lec_users = new BufferedReader(new FileReader("usuarios.txt"));
                 BufferedWriter esc_temp = new BufferedWriter(new FileWriter("temp.txt"));
-                    
-                    String nombre = lbl_nombre.getText(),linea;
-                    ArrayList<String> campos;
-                    
-                    while((linea = lec_users.readLine())!=null)
-                    {
-                        campos = wbs.separar(linea);
-                        if (campos.get(0).equals(nombre)) 
-                        {
-                            esc_temp.write(campos.get(0)+","+txt_pass.getText()+","+campos.get(2)+ ",1,");
-                        }
-                        else
-                        {
-                            esc_temp.write(linea);
-                        }
-                        esc_temp.newLine();
+
+                String nombre = lbl_nombre.getText(), linea;
+                ArrayList<String> campos;
+
+                while ((linea = lec_users.readLine()) != null) {
+                    campos = wbs.separar(linea);
+                    if (campos.get(0).equals(nombre)) {
+                        esc_temp.write(campos.get(0) + "," + txt_pass.getText() + "," + campos.get(2) + ",1,");
+                    } else {
+                        esc_temp.write(linea);
                     }
-                
+                    esc_temp.newLine();
+                }
+
                 lec_users.close();
                 esc_temp.close();
-                
+
                 BufferedReader lec_temp = new BufferedReader(new FileReader("temp.txt"));
                 BufferedWriter esc_users = new BufferedWriter(new FileWriter("usuarios.txt"));
-                                        
-                    while((linea = lec_temp.readLine())!=null)
-                    {
-                        esc_users.write(linea);
-                        esc_users.newLine();
-                    }
-                
+
+                while ((linea = lec_temp.readLine()) != null) {
+                    esc_users.write(linea);
+                    esc_users.newLine();
+                }
+
                 esc_users.close();
                 lec_temp.close();
-                
-            }
-            catch (IOException ioe) 
-            {
+
+            } catch (IOException ioe) {
                 System.out.println("error en la lectura del archivo");
                 ioe.printStackTrace();
             }
-            
-            frm_editarperfil.dispose();
 
+        }
+        if (ruta != null) {
+
+            try {
+                File ft = new File("allusers/" + lbl_nombre.getText() + "/foto.png");
+                String l = null;
+                BufferedImage imagen = null;
+
+                imagen = ImageIO.read(archivo);
+
+                File destino = new File("allusers/" + lbl_nombre.getText() + "/foto.png");
+
+                ImageIO.write(imagen, "png", destino);
+
+
+                rsscalelabel.RSScaleLabel.setScaleLabel(this.lbl_foto, "allusers/" + lbl_nombre.getText() + "/foto.png");
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            frm_editarperfil.dispose();
         }
     }//GEN-LAST:event_btn_aceptarActionPerformed
 
