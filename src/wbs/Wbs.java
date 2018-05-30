@@ -215,6 +215,15 @@ public class Wbs {
                     "allusers/"
                     +user.getName()
                     +"/"+((Project)tree.getInfo()).getName()+".txt"));
+            
+            BufferedWriter agregarproyecto = new BufferedWriter(
+                    new FileWriter("allusers/"
+                    +user.getName()
+                    +"/projectindex.txt",true));
+            
+            agregarproyecto.write(((Project)tree.getInfo()).getName());
+            agregarproyecto.newLine();
+            agregarproyecto.close();
         }
         catch (IOException ioe) 
         {
