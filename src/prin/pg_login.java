@@ -370,20 +370,22 @@ public class pg_login extends javax.swing.JFrame {
             BufferedReader reader = null;
              try {
                  int size;
+                 String palabras[];
                  reader = new BufferedReader(new FileReader("usuarios.txt"));
                   while ((line = reader.readLine()) != null) {
-                    if (line.indexOf(words) > -1) {  
+                      palabras = substr(line, 3);
+                    if (palabras[0].equals(txt_user.getText()) && palabras[1].equals(txt_pass.getText())) {
                         size = line.length();
-                          System.out.println("Line: "+line);
+                        System.out.println("Line: " + line);
                         char dig = line.charAt(size - 2);
-                          System.out.println("Dig: "+dig);
-                          name = txt_user.getText();
+                        System.out.println("Dig: " + dig);
+                        name = txt_user.getText();
                         if (dig == '2') {
                             mensajeerror = true;
                             new pg_ComunUser().setVisible(true);
                             Wbs.user = new User(name);
                             this.dispose();
-                        }else if(dig == '1'){
+                        } else if (dig == '1') {
                             mensajeerror = true;
                             pg_userprin admp = new pg_userprin();
                             admp.setVisible(true);
@@ -391,7 +393,10 @@ public class pg_login extends javax.swing.JFrame {
                             Wbs.admin = new Admin(name);
                             Wbs.user = new User(name);
                             this.dispose();
-                        }
+                    }
+//                    if (line.indexOf(words) > -1) {  
+//                      
+//                        }
                         
                     }
                   }
@@ -412,7 +417,39 @@ public class pg_login extends javax.swing.JFrame {
            
         }
     }
-    
+    private String[] substr(String line, int comas) {
+        int ant = 0, p = 0, contguion = 0;
+        String[] palabras = new String[100];
+        for (int j = 0; j < line.length() - 1; j++) {
+            if (line.charAt(j) == ',') {
+                if (comas == 0) {
+                    palabras[0] = line.substring(0, j);
+                    ant = j + 1;
+                    contguion++;
+
+                    p++;
+
+                } else {
+                    if (contguion < comas) {
+                        palabras[p] = line.substring(ant, j);
+                        ant = j + 1;
+
+                        p++;
+                        contguion++;
+
+                    }
+
+                }
+            }
+            if (contguion == comas) {
+                palabras[p] = line.substring(ant, line.length() - 1);
+
+                p++;
+                contguion++;
+            }
+        }
+        return palabras;
+    }
     private void btn_cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_btn_cerrarMouseClicked
