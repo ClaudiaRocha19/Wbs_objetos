@@ -477,45 +477,110 @@ public class pg_userprin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editperfilMouseClicked
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
-        if (!txt_pass.equals("")) {
-            File arch = new File("temp.txt");
-            File usuarios = new File("usuarios.txt");
-            BufferedReader br = null;
+        if (!(txt_pass.getText().equals(""))) {
+//            File arch = new File("temp.txt");
+//            File usuarios = new File("usuarios.txt");
+//            BufferedReader br = null,btemp = null;
+//
+//            String line,linea, word = lbl_nombre.getText();
+//
+//            try {
+//                br = new BufferedReader(new FileReader(usuarios));
+//                btemp = new BufferedReader(new FileReader(arch));
+//                BufferedWriter bw = new BufferedWriter(new FileWriter(arch)),usu = new BufferedWriter(new FileWriter(usuarios));;
+//                String[] palabras = new String[100];
+//                
+//                while ((line = br.readLine()) != null) {
+//                    palabras = substr(line, 3);
+//                    if (palabras[0].equals(word)) {
+//
+//                        bw.write(palabras[0] + "," + txt_pass.getText() + "," + palabras[2] + "," + "1,");
+//                        bw.newLine();
+//                    } else {
+//                        bw.write(line);
+//                        bw.newLine();
+//                    }
+//
+//                }
+//                
+//                bw.close();
+//                br.close();
+//                
+////                while((linea = btemp.readLine()) != null){
+////                    usu.write(linea);
+////                    usu.newLine();
+////                }
+//               usu.close();
+//               btemp.close();
+////                if (usuarios.exists()) {
+////                    String nm = usuarios.getName();
+////                    
+////
+////                    boolean renombrado =  arch.renameTo(usuarios);
+////                    if (renombrado) {
+////                        System.out.println("Renombrado realizado");
+////                    }else{
+////                        System.out.println("Error al renombrar");
+////                    }
+////                    boolean borrado = usuarios.delete();
+////                    if (borrado) {
+////                        System.out.println("Se borro el archivo usuarios");
+////                    }else{
+////                        System.out.println("No se pudo eliminar el archivo");
+////                    }
+////                    
+////                }
+//
+//            } catch (FileNotFoundException ex) {
+//                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, porfavor intentelo nuevamente");
+//            } catch (IOException ex) {
+//                Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
+//            }
 
-            String line, word = lbl_nombre.getText();
-
-            try {
-                br = new BufferedReader(new FileReader("usuarios.txt"));
-                BufferedWriter bw = new BufferedWriter(new FileWriter(arch));
-                String[] palabras = new String[100];
-                line = br.readLine();
-                while ((line = br.readLine()) != null) {
-                    palabras = substr(line, 3);
-                    if (palabras[0].equals(word)) {
-
-                        bw.write(palabras[0] + "," + txt_pass.getText() + "," + palabras[2] + "," + "1,");
-                        bw.newLine();
-                    } else {
-                        bw.write(line);
-                        bw.newLine();
+            try 
+            {
+                BufferedReader lec_users = new BufferedReader(new FileReader("usuarios.txt"));
+                BufferedWriter esc_temp = new BufferedWriter(new FileWriter("temp.txt"));
+                    
+                    String nombre = lbl_nombre.getText(),linea;
+                    ArrayList<String> campos;
+                    
+                    while((linea = lec_users.readLine())!=null)
+                    {
+                        campos = wbs.separar(linea);
+                        if (campos.get(0).equals(nombre)) 
+                        {
+                            esc_temp.write(campos.get(0)+","+txt_pass.getText()+","+campos.get(2)+ ",1,");
+                        }
+                        else
+                        {
+                            esc_temp.write(linea);
+                        }
                     }
-
-                }
-                bw.close();
-                br.close();
-               
-                if (usuarios.exists()) {
-                    String nm = usuarios.getName();
-                    arch.renameTo(usuarios);
-                    usuarios.delete();
-
-                }
-
-            } catch (FileNotFoundException ex) {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, porfavor intentelo nuevamente");
-            } catch (IOException ex) {
-                Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
+                
+                lec_users.close();
+                esc_temp.close();
+                
+                BufferedReader lec_temp = new BufferedReader(new FileReader("temp.txt"));
+                BufferedWriter esc_users = new BufferedWriter(new FileWriter("usuarios.txt"));
+                                        
+                    while((linea = lec_temp.readLine())!=null)
+                    {
+                        esc_users.write(linea);
+                    }
+                
+                esc_users.close();
+                lec_temp.close();
+                
             }
+            catch (IOException ioe) 
+            {
+                System.out.println("error en la lectura del archivo");
+                ioe.printStackTrace();
+            }
+            
+            frm_editarperfil.dispose();
+
         }
     }//GEN-LAST:event_btn_aceptarActionPerformed
 
