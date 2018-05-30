@@ -1,0 +1,5 @@
+prueba
+-p1
+--rick,118/4/2,118/4/5,aaaa,ALTA
+--rick,118/4/2,118/4/5,aaaa,ALTA
+--rick,118/4/2,118/4/5,aaaa,ALTA

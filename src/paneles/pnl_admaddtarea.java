@@ -200,11 +200,14 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
     private void combo_prioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_prioridadActionPerformed
         if(combo_prioridad.getSelectedItem().equals("Alta")){
             pnl_prioricolor.setBackground(Color.red);
+            prioridad= Prioridad.ALTA;
         }else {
             if(combo_prioridad.getSelectedItem().equals("Media")){
             pnl_prioricolor.setBackground(Color.yellow);
+            prioridad= Prioridad.MEDIA;
             }else{
                 pnl_prioricolor.setBackground(Color.green);
+                prioridad= Prioridad.BAJA;
             }
             
         }
@@ -219,7 +222,7 @@ public class pnl_admaddtarea extends javax.swing.JPanel {
             case 1:
                 prioridad= Prioridad.MEDIA;
                 break;    
-            case 3:
+            case 2:
                 prioridad= Prioridad.BAJA;
                 break;    
         }

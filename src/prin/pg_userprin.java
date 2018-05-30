@@ -556,6 +556,7 @@ public class pg_userprin extends javax.swing.JFrame {
                         {
                             esc_temp.write(linea);
                         }
+                        esc_temp.newLine();
                     }
                 
                 lec_users.close();
@@ -567,6 +568,7 @@ public class pg_userprin extends javax.swing.JFrame {
                     while((linea = lec_temp.readLine())!=null)
                     {
                         esc_users.write(linea);
+                        esc_users.newLine();
                     }
                 
                 esc_users.close();

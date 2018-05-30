@@ -1,0 +1,4 @@
+prueba2
+-p1
+--rick,118/4/3,118/4/4,aaaa,MEDIA
+--rick,118/4/3,118/4/4,aaaa,BAJA

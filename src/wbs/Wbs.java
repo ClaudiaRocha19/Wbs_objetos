@@ -203,6 +203,58 @@ public class Wbs {
         // pendiente diseño y aplicación de ventana
         pg_adminprin pgp = new pg_adminprin();
         pgp.setNombre(project.getName());
+        if (project.getPacks().isEmpty()) 
+        {
+            System.out.println("nuevo proyecto creado");
+        }
+        else
+        {
+            try 
+            {
+                BufferedReader carga = new BufferedReader(
+                    new FileReader(
+                    "allusers/"
+                    +user.getName()
+                    +"/"+project.getName()+".txt"));
+                    
+                    ArrayList<String> campos;
+                    String linea;
+                    Pack pack= new Pack();
+                    
+                    while((linea=carga.readLine())!=null)
+                    {
+                        if (linea.startsWith("--")) 
+                        {
+                            linea=linea.substring(2);
+                            campos=separar(linea);
+//                            pack.addTask(new Task(
+//                                    searchCol(campos.get(0)),
+//                                    
+//                            ));
+                        }
+                        else if(linea.startsWith("-"))
+                        {
+                            linea=linea.substring(1);
+                            project.addPack(linea);
+                            pack=project.getPacks().get(project.getPacks().size()-1);
+                        }
+                        else
+                        {
+                            project.setNativo(tree);
+                            tree.setInfo(project);
+                        }
+                        
+                    }
+                
+                
+                carga.close();
+            }
+            catch (Exception e) 
+            {
+                
+            }
+            
+        }
         pgp.setVisible(true);
         
     }

@@ -29,6 +29,9 @@ public class Pack {
         this.name = name;
         this.subnativo = subnativo;
     }
+
+    public Pack() {
+    }
     
     
     
