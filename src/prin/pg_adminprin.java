@@ -23,10 +23,14 @@ public class pg_adminprin extends javax.swing.JFrame {
 
     public void setNombre(String nombre) {
         this.lbl_nombre.setText(nombre);
-        p=new Project(nombre,Wbs.tree);
+        p = new Project(nombre,Wbs.tree);
         
     }
 
+    public Project getP() {
+        return p;
+    }
+    
     /**
      * Creates new form pg_adminprin
      */
