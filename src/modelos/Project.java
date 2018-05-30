@@ -33,7 +33,9 @@ public class Project {
     public void addPack(String name)
     {
         SubNodo sn = new SubNodo();
+        sn.setLevel(2);
         Pack nuevo = new Pack(this, name, sn);
+        sn.setInfo(nuevo);
         nativo.add(sn);
         
         packs.add(nuevo);

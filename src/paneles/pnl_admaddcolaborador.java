@@ -266,7 +266,7 @@ public class pnl_admaddcolaborador extends javax.swing.JPanel {
             }
 
             
-            JOptionPane.showMessageDialog(this, " Paquete nuevo creado\n se ha notificado a los nuevos colaboradores", "Notificaciones enviadas", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "nuevos colaboradores agregados", "Notificaciones enviadas", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (IOException ioe)
         {
