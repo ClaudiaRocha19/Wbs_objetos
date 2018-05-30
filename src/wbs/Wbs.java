@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 import mail.*;
 import modelos.*;
@@ -201,8 +202,6 @@ public class Wbs {
     public void openProject(Project project)
     {
         // pendiente diseño y aplicación de ventana
-        pg_adminprin pgp = new pg_adminprin();
-        pgp.setNombre(project.getName());
         if (project.getPacks().isEmpty()) 
         {
             System.out.println("nuevo proyecto creado");
@@ -227,10 +226,13 @@ public class Wbs {
                         {
                             linea=linea.substring(2);
                             campos=separar(linea);
-//                            pack.addTask(new Task(
-//                                    searchCol(campos.get(0)),
-//                                    
-//                            ));
+                            pack.addTask(new Task(
+                                    searchCol(campos.get(0)),
+                                    detFecha(campos.get(1)),
+                                    detFecha(campos.get(2)),
+                                    campos.get(3),
+                                    detPrioridad(campos.get(4))
+                            ));
                         }
                         else if(linea.startsWith("-"))
                         {
@@ -241,6 +243,21 @@ public class Wbs {
                         else
                         {
                             project.setNativo(tree);
+                            
+                                BufferedReader lector = new BufferedReader(
+                                        new FileReader(
+                                        "allusers/"
+                                        +user.getName()
+                                        +"/"+project.getName()+"colaborators.txt"));
+
+                                String colab;
+                                while((colab= lector.readLine())!=null)
+                                {
+                                    project.addcol(new User(colab));
+                                }
+                                
+                                lector.close();
+                                
                             tree.setInfo(project);
                         }
                         
@@ -255,6 +272,8 @@ public class Wbs {
             }
             
         }
+        pg_adminprin pgp = new pg_adminprin();
+        pgp.setNombre(project.getName());
         pgp.setVisible(true);
         
     }
@@ -304,6 +323,35 @@ public class Wbs {
             e.printStackTrace();
         }
         
+    }
+    
+    private Prioridad detPrioridad(String linea)
+    {
+        if (linea.equals("ALTA")) 
+        {
+            return Prioridad.ALTA;
+        }
+        else if(linea.equals("MEDIA"))
+        {
+            return Prioridad.MEDIA;
+        }
+        else
+        {
+            return Prioridad.BAJA;
+        }
+    }
+    
+    private Date detFecha(String linea)
+    {
+        int year,month,day;
+        
+        year= Integer.parseInt(linea.substring(0, linea.indexOf("/")));
+        linea=linea.substring(0, linea.indexOf("/")+1);
+        month= Integer.parseInt(linea.substring(0, linea.indexOf("/")));
+        linea=linea.substring(0, linea.indexOf("/")+1);
+        day= Integer.parseInt(linea);
+        
+        return new Date(year,month,day);
     }
     
     public Pack searchPack(String packName)
