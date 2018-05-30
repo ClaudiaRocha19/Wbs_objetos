@@ -5,6 +5,16 @@
  */
 package paneles;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import modelos.Pack;
+import modelos.Prioridad;
+import modelos.Project;
+import modelos.Task;
+import prin.pg_adminprin;
+
 /**
  *
  * @author Leonidas
@@ -16,6 +26,7 @@ public class pnl_prioridad extends javax.swing.JPanel {
      */
     public pnl_prioridad() {
         initComponents();
+        cargarTareas();
     }
 
     /**
@@ -36,11 +47,11 @@ public class pnl_prioridad extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jPanel12 = new javax.swing.JPanel();
+        pnl_alta = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jPanel13 = new javax.swing.JPanel();
+        pnl_media = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jPanel14 = new javax.swing.JPanel();
+        pnl_baja = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(650, 500));
@@ -122,54 +133,54 @@ public class pnl_prioridad extends javax.swing.JPanel {
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_alta.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_altaLayout = new javax.swing.GroupLayout(pnl_alta);
+        pnl_alta.setLayout(pnl_altaLayout);
+        pnl_altaLayout.setHorizontalGroup(
+            pnl_altaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 528, Short.MAX_VALUE)
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_altaLayout.setVerticalGroup(
+            pnl_altaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 368, Short.MAX_VALUE)
         );
 
-        jScrollPane5.setViewportView(jPanel12);
+        jScrollPane5.setViewportView(pnl_alta);
 
         jPanel11.add(jScrollPane5);
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_media.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_mediaLayout = new javax.swing.GroupLayout(pnl_media);
+        pnl_media.setLayout(pnl_mediaLayout);
+        pnl_mediaLayout.setHorizontalGroup(
+            pnl_mediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 528, Short.MAX_VALUE)
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_mediaLayout.setVerticalGroup(
+            pnl_mediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 368, Short.MAX_VALUE)
         );
 
-        jScrollPane6.setViewportView(jPanel13);
+        jScrollPane6.setViewportView(pnl_media);
 
         jPanel11.add(jScrollPane6);
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_baja.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_bajaLayout = new javax.swing.GroupLayout(pnl_baja);
+        pnl_baja.setLayout(pnl_bajaLayout);
+        pnl_bajaLayout.setHorizontalGroup(
+            pnl_bajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 528, Short.MAX_VALUE)
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnl_bajaLayout.setVerticalGroup(
+            pnl_bajaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 368, Short.MAX_VALUE)
         );
 
-        jScrollPane7.setViewportView(jPanel14);
+        jScrollPane7.setViewportView(pnl_baja);
 
         jPanel11.add(jScrollPane7);
 
@@ -198,16 +209,46 @@ public class pnl_prioridad extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+     private void cargarTareas() {
+        ArrayList<Pack> packs = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
+        pg_adminprin pa = new pg_adminprin();
+        int y = 4;
+        Project p = pa.getP();
+        packs = p.getPacks();
 
+         for (Pack pack : packs) {
+             for (Task task : tasks) {
+                 JPanel panel = new JPanel();
+                 JLabel label = new JLabel();
+                 JLabel label2 = new JLabel();
+                 panel.setBounds(5, y, 300, 100);
+               
+                panel.setBackground(new Color(250,245,160));
+                 panel.add(label);
+                 panel.add(label2);
+                 label.setText(task.getTaskName());
+                 label.setFont(new java.awt.Font("Arial", 0, 12));
+                 label2.setText("Fecha limite: "+task.getEndDate());
+                 if (task.getPrioridad().equals(Prioridad.ALTA)) {
+                     pnl_alta.add(panel);
+                 }else{
+                     if(task.getPrioridad().equals(Prioridad.MEDIA)){
+                         pnl_media.add(panel);
+                     }else{
+                         pnl_baja.add(panel);
+                     }
+                 }
+                 y+=90;
+             }
+         }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
@@ -215,5 +256,10 @@ public class pnl_prioridad extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JPanel pnl_alta;
+    private javax.swing.JPanel pnl_baja;
+    private javax.swing.JPanel pnl_media;
     // End of variables declaration//GEN-END:variables
+
+   
 }

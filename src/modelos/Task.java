@@ -27,6 +27,10 @@ public class Task {
     
     SubNodo nativo;
 
+    public Prioridad getPrioridad() {
+        return prioridad;
+    }
+
     
     public Task(User attendant, Date startDate, Date endDate, String taskName,Prioridad prioridad) 
     {
