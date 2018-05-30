@@ -235,7 +235,7 @@ public class pg_userprin extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tabla_colaboradores);
 
         btn_cancelar1.setBackground(new java.awt.Color(204, 51, 0));
-        btn_cancelar1.setText("Cancelar");
+        btn_cancelar1.setText("OK");
         btn_cancelar1.setColorHover(new java.awt.Color(255, 153, 0));
         btn_cancelar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btn_cancelar1.addActionListener(new java.awt.event.ActionListener() {
@@ -473,7 +473,7 @@ public class pg_userprin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void btn_editperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_editperfilMouseClicked
-
+        frm_editarperfil.setLocationRelativeTo(this);
         frm_editarperfil.setVisible(true);
         String nombre = lbl_nombre.getText();
         try {
@@ -553,6 +553,7 @@ public class pg_userprin extends javax.swing.JFrame {
 
     private void btn_vercolaboradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_vercolaboradoresMouseClicked
         //frameColaboradores.setLocationRelativeTo(null);
+        frameColaboradores.setLocationRelativeTo(this);
         poblarColaboradores();
         frameColaboradores.setVisible(true);
     }//GEN-LAST:event_btn_vercolaboradoresMouseClicked
