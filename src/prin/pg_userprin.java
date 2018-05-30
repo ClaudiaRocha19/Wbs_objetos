@@ -579,7 +579,7 @@ public class pg_userprin extends javax.swing.JFrame {
                 ioe.printStackTrace();
             }
             
-
+            frm_editarperfil.dispose();
 
         }
     }//GEN-LAST:event_btn_aceptarActionPerformed
