@@ -45,7 +45,7 @@ public class pnl_adminicio extends javax.swing.JPanel {
         int antx = 5;
         ImageIcon icon = new ImageIcon("src/img/folder.png");
         packs = ((Project) (Wbs.tree.getInfo())).getPacks();
-        
+
         if (packs == null || packs.size() == 0) {
             JLabel label = new JLabel();
             label.setBounds(10, 0, 250, 150);
@@ -56,19 +56,21 @@ public class pnl_adminicio extends javax.swing.JPanel {
         } else {
             for (Pack pack : packs) {
                 JPanel panel = new JPanel();
-                JLabel label = new JLabel();
                 JLabel labelicon = new JLabel();
-                labelicon.setBounds(0, 0, 150, 150);
-                label.setBounds(0, 0, 150, 150);
+                labelicon.setBounds(0, 80, 200, 100);
+                labelicon.setFont(new java.awt.Font("Arial", 0, 14));
                 labelicon.setIcon(icon);
-                label.setText(pack.getName());
-                panel.setBounds(0, 0, 300, 150);
-                panel.setBackground(Color.white);              
-                antx += 310;
-                panel.add(labelicon);
-                panel.add(label);
-                pnl_packs.add(panel);
+                labelicon.setText(pack.getName());
+                panel.setBounds(antx, 0, 200, 100);
 
+                panel.setBackground(Color.white);
+                panel.add(labelicon);
+                pnl_packs.add(panel);
+                antx += 155;
+                if (antx > pnl_packs.getWidth()) {
+                    pnl_packs.setSize(pnl_packs.getWidth()+(antx - pnl_packs.getWidth()), 120);
+                    
+                }
             }
         }
 
@@ -97,6 +99,8 @@ public class pnl_adminicio extends javax.swing.JPanel {
         jLabel8.setText("Colaboradores de proyecto");
 
         pnl_packs.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_packs.setMinimumSize(new java.awt.Dimension(659, 120));
+        pnl_packs.setPreferredSize(new java.awt.Dimension(659, 120));
 
         javax.swing.GroupLayout pnl_packsLayout = new javax.swing.GroupLayout(pnl_packs);
         pnl_packs.setLayout(pnl_packsLayout);
@@ -106,7 +110,7 @@ public class pnl_adminicio extends javax.swing.JPanel {
         );
         pnl_packsLayout.setVerticalGroup(
             pnl_packsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGap(0, 129, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(pnl_packs);
