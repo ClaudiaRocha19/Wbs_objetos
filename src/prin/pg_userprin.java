@@ -23,9 +23,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 import modelos.Pack;
 import modelos.Project;
 import wbs.Wbs;
+import static wbs.Wbs.user;
 
 /**
  *
@@ -89,7 +91,7 @@ public class pg_userprin extends javax.swing.JFrame {
         frameColaboradores = new javax.swing.JFrame();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        colaboradores = new javax.swing.JTable();
+        tabla_colaboradores = new javax.swing.JTable();
         btn_cancelar1 = new rojeru_san.RSButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -215,19 +217,16 @@ public class pg_userprin extends javax.swing.JFrame {
 
         jPanel5.setMinimumSize(new java.awt.Dimension(346, 388));
 
-        colaboradores.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_colaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        colaboradores.setMinimumSize(new java.awt.Dimension(300, 64));
-        jScrollPane2.setViewportView(colaboradores);
+        tabla_colaboradores.setMinimumSize(new java.awt.Dimension(300, 64));
+        jScrollPane2.setViewportView(tabla_colaboradores);
 
         btn_cancelar1.setBackground(new java.awt.Color(204, 51, 0));
         btn_cancelar1.setText("Cancelar");
@@ -597,8 +596,53 @@ public class pg_userprin extends javax.swing.JFrame {
 
     private void btn_vercolaboradoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_vercolaboradoresMouseClicked
         //frameColaboradores.setLocationRelativeTo(null);
+        poblarColaboradores();
         frameColaboradores.setVisible(true);
     }//GEN-LAST:event_btn_vercolaboradoresMouseClicked
+    
+    private void poblarColaboradores()
+    {
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("Colaborador");
+        dtm.addColumn("Proyecto");
+        
+        try 
+        {
+            BufferedReader agpro = new BufferedReader(
+                    new FileReader(
+                    "allusers/"
+                    +user.getName()
+                    +"/projectindex.txt"));
+            
+            String linea,subline;
+            while((linea=agpro.readLine())!=null)
+            {
+                BufferedReader agcol = new BufferedReader(
+                    new FileReader(
+                    "allusers/"
+                    +user.getName()
+                    +"/"+linea+"colaborators.txt"));
+                
+                    while((subline=agcol.readLine())!=null)
+                    {
+                        dtm.addRow(new String[]{subline,linea});
+                    }
+                
+                agcol.close();
+            }
+            
+            agpro.close();
+            tabla_colaboradores.setModel(dtm);
+        } 
+        catch (IOException e) 
+        {
+            System.out.println("Error de lectura del archivo");
+        }
+        
+        
+        
+    }
+    
     private String[] substr(String line, int comas) {
         int ant = 0, p = 0, contguion = 0;
         String[] palabras = new String[100];
@@ -687,7 +731,6 @@ public class pg_userprin extends javax.swing.JFrame {
     private javax.swing.JPanel btn_editperfil;
     private rojeru_san.RSButton btn_examinar;
     private javax.swing.JPanel btn_vercolaboradores;
-    private javax.swing.JTable colaboradores;
     private javax.swing.JFrame frameColaboradores;
     private javax.swing.JFrame frm_editarperfil;
     private javax.swing.JLabel jLabel1;
@@ -710,6 +753,7 @@ public class pg_userprin extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_nombre;
     private javax.swing.JLabel lbl_usufoto;
     private javax.swing.JPanel pnl_mostrarproyectos;
+    private javax.swing.JTable tabla_colaboradores;
     private javax.swing.JPasswordField txt_pass;
     // End of variables declaration//GEN-END:variables
 }
