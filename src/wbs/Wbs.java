@@ -275,6 +275,7 @@ public class Wbs {
         pg_adminprin pgp = new pg_adminprin();
         pgp.setNombre(project.getName());
         pgp.setVisible(true);
+        savedParameters.setVisible(false);
         
     }
     

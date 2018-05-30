@@ -5,7 +5,12 @@
  */
 package prin;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,10 +26,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +55,7 @@ public class pg_userprin extends javax.swing.JFrame {
      */
     public pg_userprin() {
         initComponents();
-
+        
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
@@ -70,7 +77,7 @@ public class pg_userprin extends javax.swing.JFrame {
             rsscalelabel.RSScaleLabel.setScaleLabel(this.lbl_foto, "src/img/defaultuser.png");
             foto = new File("src/img/defaultuser.png");
         }
-
+        cargarProyectos();
 //        ImageIcon image= new ImageIcon(getClass().getResource("foto.png"));
 //        ImageIcon newImage = new ImageIcon(image.getImage().getScaledInstance(lbl_foto.getWidth(), lbl_foto.getHeight(), Image.SCALE_DEFAULT));
 //        lbl_foto.setIcon(newImage);
@@ -361,6 +368,11 @@ public class pg_userprin extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 545));
 
+        pnl_mostrarproyectos.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_mostrarproyectos.setMinimumSize(new java.awt.Dimension(578, 798));
+        pnl_mostrarproyectos.setPreferredSize(new java.awt.Dimension(578, 798));
+        pnl_mostrarproyectos.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout pnl_mostrarproyectosLayout = new javax.swing.GroupLayout(pnl_mostrarproyectos);
         pnl_mostrarproyectos.setLayout(pnl_mostrarproyectosLayout);
         pnl_mostrarproyectosLayout.setHorizontalGroup(
@@ -369,7 +381,7 @@ public class pg_userprin extends javax.swing.JFrame {
         );
         pnl_mostrarproyectosLayout.setVerticalGroup(
             pnl_mostrarproyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 798, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(pnl_mostrarproyectos);
@@ -633,7 +645,66 @@ public class pg_userprin extends javax.swing.JFrame {
         }
         return palabras;
     }
+     private void cargarProyectos() {
+         BufferedReader proyect = null;
+         int y = 5;
+         
+         ImageIcon icon = new ImageIcon("src/img/package.png");
+         String rutaproyects = "allusers/" + lbl_nombre.getText() + "/projectindex.txt";
+        try {
+            
+            File proyectos = new File(rutaproyects);
+            if (proyectos.canRead()) {
+                proyect = new BufferedReader(new FileReader(rutaproyects));
+            String linea = null;
+            while((linea=proyect.readLine())!=null){
+                JPanel panel = new JPanel();
+                JLabel label = new JLabel();
+                panel.setBounds(5, y, 400, 100);
+               
+                panel.setBackground(Color.white);
+                label.setIcon(icon);
+                label.setFont(new java.awt.Font("Arial", 0, 14));
+                label.setText(linea);
+                label.addMouseListener(new MouseAdapter()  
+                {  
+                    public void mouseClicked(MouseEvent e)  
+                    {  
+                       wbs.openProject(new Project(label.getText()));
+                       
+                        
+                    }  
 
+                   
+                }); 
+                panel.add(label);
+                pnl_mostrarproyectos.setLayout(new FlowLayout(FlowLayout.LEFT));
+                pnl_mostrarproyectos.add(panel);
+                y+=155;
+                }
+            }else{
+                JLabel label = new JLabel();  
+                label.setFont(new java.awt.Font("Arial", 0, 14));
+                label.setText("No hay proyectos");
+                pnl_mostrarproyectos.add(label);
+                
+            }
+            
+            
+        
+        
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                proyect.close();
+            } catch (IOException ex) {
+                Logger.getLogger(pg_userprin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -713,4 +784,6 @@ public class pg_userprin extends javax.swing.JFrame {
     private javax.swing.JTable tabla_colaboradores;
     private javax.swing.JPasswordField txt_pass;
     // End of variables declaration//GEN-END:variables
+
+   
 }
