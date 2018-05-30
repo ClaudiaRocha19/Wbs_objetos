@@ -89,7 +89,7 @@ public class pg_userprin extends javax.swing.JFrame {
         frameColaboradores = new javax.swing.JFrame();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        colaboradores = new javax.swing.JTable();
         btn_cancelar1 = new rojeru_san.RSButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -211,7 +211,11 @@ public class pg_userprin extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        frameColaboradores.setMinimumSize(new java.awt.Dimension(346, 388));
+
+        jPanel5.setMinimumSize(new java.awt.Dimension(346, 388));
+
+        colaboradores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -222,7 +226,8 @@ public class pg_userprin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        colaboradores.setMinimumSize(new java.awt.Dimension(300, 64));
+        jScrollPane2.setViewportView(colaboradores);
 
         btn_cancelar1.setBackground(new java.awt.Color(204, 51, 0));
         btn_cancelar1.setText("Cancelar");
@@ -682,6 +687,7 @@ public class pg_userprin extends javax.swing.JFrame {
     private javax.swing.JPanel btn_editperfil;
     private rojeru_san.RSButton btn_examinar;
     private javax.swing.JPanel btn_vercolaboradores;
+    private javax.swing.JTable colaboradores;
     private javax.swing.JFrame frameColaboradores;
     private javax.swing.JFrame frm_editarperfil;
     private javax.swing.JLabel jLabel1;
@@ -700,7 +706,6 @@ public class pg_userprin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_foto;
     private javax.swing.JLabel lbl_nombre;
     private javax.swing.JLabel lbl_usufoto;
