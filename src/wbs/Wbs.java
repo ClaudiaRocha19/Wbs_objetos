@@ -211,10 +211,26 @@ public class Wbs {
     {
         try 
         {
+            //guardar el arbol de proyecto
             tree.save(new FileWriter(
                     "allusers/"
                     +user.getName()
                     +"/"+((Project)tree.getInfo()).getName()+".txt"));
+            
+            //guardar los colaboradores
+            BufferedWriter escColaboradores = new BufferedWriter(
+                    (new FileWriter(
+                    "allusers/"
+                    +user.getName()
+                    +"/"+((Project)tree.getInfo()).getName()+"colaborators.txt")));
+            
+            for (User col : ((Project)tree.getInfo()).getCols()) 
+            {
+                escColaboradores.write(col.getName());
+                escColaboradores.newLine();
+            }
+            
+            escColaboradores.close();
             
             BufferedWriter agregarproyecto = new BufferedWriter(
                     new FileWriter("allusers/"
