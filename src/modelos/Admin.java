@@ -22,6 +22,10 @@ public final class Admin extends User{
         super(name);
     }
     
+    /**
+     * Agrega un proyecto nuevo a un grupo de proyectos ya creado.
+     * @param project:proyecto
+     */
     public void addProject(Project project)
     {
         this.projects.add(project);

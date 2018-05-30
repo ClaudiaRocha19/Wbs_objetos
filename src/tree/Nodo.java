@@ -8,7 +8,7 @@ package tree;
 import java.util.ArrayList;
 
 /**
- *
+ * Maneja los nodos para la creacion de un arbol.
  * @author ESTU-5K
  */
 public class Nodo{
@@ -29,12 +29,20 @@ public class Nodo{
     
     
 //BASICS________________________________________________________________________
-    
+    /**
+     * Retorna la informacion de un subnodo del arbol.
+     * @param index:indice del subnodo
+     * @return el objeto guardado en el subnodo de indice(index)
+     */
     public Object sub(int index)
     {
         return subs.get(index).getInfo();
     }
-    
+    /**
+     * Retorna el nodo guarda la informacion dada.
+     * @param infor:informacion a buscar.
+     * @return nodo que contiene la informacion.
+     */
     public Nodo sub(Object infor)
     {
         for (SubNodo sub : subs) 
@@ -47,7 +55,11 @@ public class Nodo{
         
         return null;
     }
-    
+    /**
+     * Revisa si un objeto tipo Nodo es igual a otro ya sea por el espacio en memoria o la información que guarda.
+     * @param anObject
+     * @return true si son totalmente iguales o iguales en informacion, en otro caso false
+     */
     @Override
     public boolean equals(Object anObject)
     {
@@ -66,8 +78,11 @@ public class Nodo{
         
         return false;
     }
-
-    @Override    
+    /**
+     * Pasa la informacion del nodo a un string.
+     * @return string de informacion
+     */
+    @Override
     public String toString()
     {
         return "nodo: "+this.getInfo()+ "   //  " +this.hashCode();
@@ -79,17 +94,25 @@ public class Nodo{
     {
         add(new SubNodo(infor,this));
     }
-    
+    /**
+     * Agrega un subnodo al arreglo.
+     * @param subNodo 
+     */
     public void add( SubNodo subNodo )
     {
         this.subs.add(subNodo);
     }
-    
+    /**
+     * Elimina el nodo
+     * @param subNodo 
+     */
     public void del(SubNodo subNodo)
     {
         subNodo.del();
     }
-    
+    /**
+     * Imprime el arbol de trabajo.
+     */
     public void print()
     {
         System.out.println("\nESTRUCTURA RAMIFICADA DEL ARBOL\n");

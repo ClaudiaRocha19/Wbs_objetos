@@ -33,7 +33,10 @@ public class Pack {
     
     
 //______________________________________________________________________________    
-    
+    /**
+     * Agrega una tarea al paquete de trabajo.
+     * @param task:tarea
+     */
     public void addTask(Task task)
     {
         SubNodo nuevo = new SubNodo(task);
@@ -41,11 +44,11 @@ public class Pack {
         tasks.add(task);
         task.nativo = nuevo;
     }
-
+    
     public ArrayList<Task> getTasks() {
         return tasks;
     }
-
+    
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
