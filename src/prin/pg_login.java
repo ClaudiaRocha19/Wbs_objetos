@@ -6,6 +6,7 @@
 package prin;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -331,6 +332,11 @@ public class pg_login extends javax.swing.JFrame {
                     {
                         wbs.addToFile(txt_reguser.getText()+","+txt_regpass.getText()+","+txt_regemail.getText()+","+userType+",", "usuarios.txt");
                         JOptionPane.showMessageDialog(null,"Registro exitoso");
+                        File c = new File("allusers/"+txt_reguser.getText());
+                        if (c.mkdir()) 
+                        {System.out.println("creado");}
+                        else
+                        {System.out.println("error de creación de directorio");}
                         pnl_registrate.setVisible(false);
                         pnl_login.setVisible(true);
                     }
